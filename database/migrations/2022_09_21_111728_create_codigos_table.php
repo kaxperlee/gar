@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('codigos', function (Blueprint $table) {
             $table->id();
             $table->string("idCodigo",4);
+            $table->string("idCodigo2",100);
             $table->string("Codigo",100);
             $table->string("Epigrafe",5);
             $table->text("Descripcion");

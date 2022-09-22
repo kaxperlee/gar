@@ -1,0 +1,17 @@
+html, body, .main .row, .sidebar {
+    height: 100%;
+}
+.main {
+    height: calc(100vh - 187px);
+}
+.navbar {
+    margin-bottom: 0;
+}
+.sidebar {
+    padding: 0; 
+    border-right:1px solid #cccccc;          
+}
+
+td {
+    color:#333333;
+}
