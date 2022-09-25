@@ -52,9 +52,10 @@
         <img src="{{asset('images/logo.png')}}" class="rounded float-start" alt="Grupo Asesor Ros">
       </a>
       <ul class="nav nav-pills menu">
-        <li class="nav-item"><a href="{{ url("/") }}" class="nav-link fw-bolder" aria-current="page">Incidencias</a></li>
-        <li class="nav-item"><a href="{{ url("/clientes") }}" class="nav-link fw-bolder">Informes</a></li>
-        <li class="nav-item"><a href="{{ url("/notificaciones") }}" class="nav-link fw-bolder">Documentos</a></li>
+      <li class="nav-item"><a href='{{ url("/") }}' class="nav-link fw-bolder" aria-current="page">Inicio</a></li>
+        <li class="nav-item"><a href='{{ url("/incidencias") }}' class="nav-link fw-bolder" aria-current="page">Incidencias</a></li>
+        <li class="nav-item"><a href='{{ url("/informes") }}' class="nav-link fw-bolder">Informes</a></li>
+        <li class="nav-item"><a href='{{ url("/documentos") }}' class="nav-link fw-bolder">Documentos</a></li>
       </ul>
     </header>
   </div>

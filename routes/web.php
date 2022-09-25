@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\InicioController;
+use App\Http\Controllers\IncidenciasController;
+use App\Http\Controllers\InformesController;
+use App\Http\Controllers\DocumentosController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,6 +21,12 @@ Route::get('/', function () {
 });
 */
 Route::middleware(['auth:sanctum', 'verified'])->get('/', [InicioController::class, 'index']);
+
+Route::middleware(['auth:sanctum', 'verified'])->get('/incidencias', [IncidenciasController::class, 'index']);
+
+Route::middleware(['auth:sanctum', 'verified'])->get('/informes', [InformesController::class, 'index']);
+
+Route::middleware(['auth:sanctum', 'verified'])->get('/documentos', [DocumentosController::class, 'index']);
 
 Route::middleware([
     'auth:sanctum',
