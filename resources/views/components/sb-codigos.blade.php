@@ -1,7 +1,8 @@
 <div>
     <div class="mb-4">
         <x-cab1 texto="Ident. Riesgo" />
-        <form action="">
+        <form action="{{route('codigos.store')}}" method="POST">
+            @csrf
             <div class="form-group mb-3">
                 <label for="">
                     <span><strong>Código riesgo:</strong> </br></span> 
