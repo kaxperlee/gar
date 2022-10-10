@@ -24,7 +24,7 @@ class InicioController extends Controller
         //$riesgo = $request->riesgo;
         $riesgo = explode ( ' ', $request->riesgo);
 
-        $codigos = Codigo::select('id','epigrafe','Codigo','idCodigo', 'Descripcion');
+        $codigos = Codigo::select('id','Epigrafe','Codigo','idCodigo', 'Descripcion');
 
         foreach ($riesgo as $id){
             $codigos->where('Codigo', 'LIKE', '%'.$id.'%');
@@ -34,7 +34,14 @@ class InicioController extends Controller
 
         //$codigos = Codigo::where('Codigo', 'LIKE', '%'.$riesgo.'%')->get();
         //return $request->all();
-        return view('inicio.store',['codigos' => $code]);
+        return view('inicio.store',['codigos' => $code, 'busqueda' => $codigos]);
+    }
+
+    public function grupo($idCodigo)
+    {
+        $codigos = Codigo::where('idCodigo',$idCodigo)->get();
+        //return $codigos;
+        return view('inicio.grupo', ['codigos' => $codigos, 'idCodigo' => $idCodigo]);
     }
 
     public function show($id)
@@ -42,4 +49,5 @@ class InicioController extends Controller
         $codigos = Codigo::where('id',$id)->get();
         return view('inicio.show', ['codigos' => $codigos, 'id' => $id]);
     }
+    
 }

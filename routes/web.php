@@ -23,7 +23,9 @@ Route::get('/', function () {
 Route::middleware(['auth:sanctum', 'verified'])->get('/', [InicioController::class, 'index'])->name('index');
 Route::middleware(['auth:sanctum', 'verified'])->get('/codigos/create/{id}', [InicioController::class, 'create'])->name('codigos.create');
 Route::middleware(['auth:sanctum', 'verified'])->post('/codigos', [InicioController::class, 'store'])->name('codigos.store');
+Route::middleware(['auth:sanctum', 'verified'])->get('/grupo/{idCodigo}', [InicioController::class, 'grupo'])->name('codigos.grupo');
 Route::middleware(['auth:sanctum', 'verified'])->get('/codigos/{id}', [InicioController::class, 'show'])->name('codigos.show');
+
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/incidencias', [IncidenciasController::class, 'index']);
 Route::middleware(['auth:sanctum', 'verified'])->get('/incidencias/create/{id}', [IncidenciasController::class, 'create'])->name('incidencias.create');

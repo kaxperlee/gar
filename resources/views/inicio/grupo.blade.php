@@ -7,8 +7,8 @@
 @endsection
 
 @section('main')
-<x-cab1 texto="Incidencias" />
-<x-cab2 texto="Bùsqueda ()" />
+<x-cab1 texto="Riesgos" />
+<x-cab2 texto="Clientes recientes" />
 <table class="table table-hover" width="100%">
     <tr>
         <th>Grupo</th>

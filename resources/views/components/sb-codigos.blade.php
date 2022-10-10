@@ -1,6 +1,6 @@
 <div>
     <div class="mb-4">
-        <x-cab1 texto="Ident. Riesgo" />
+        <x-cab1 texto="Nueva incidencia" />
         <form action="{{route('codigos.store')}}" method="POST">
             @csrf
             <div class="form-group mb-3">
@@ -17,7 +17,7 @@
     <ul>
     @foreach ($codigos as $codigo)
     <li style='list-style-type: none; margin-left:-30px; padding-bottom:4px;'>
-        <a style="text-decoration-line: none"  href="#">{{$codigo->idCodigo }}. {{ $codigo->idCodigo2 }}</a>
+        <a style="text-decoration-line: none"  href="{{route('codigos.grupo', $codigo->idCodigo)}}">{{$codigo->idCodigo }}. {{ $codigo->idCodigo2 }}</a>
     </li>
     @endforeach
     </ul>
