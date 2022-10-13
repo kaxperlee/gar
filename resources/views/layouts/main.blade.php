@@ -33,10 +33,10 @@
             {{ Auth::user()->name }}
           </a>
           <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown" style='z-index:10000'>
-            <li><a class="dropdown-item" href="{{ url("/dashboard") }}">Dashboard</a></li>
-            <li><a class="dropdown-item" href="{{ url("/user/profile") }}">Profile</a></li>
+            <li><a class="dropdown-item" href="{{ url('/dashboard') }}">Dashboard</a></li>
+            <li><a class="dropdown-item" href="{{ url('/user/profile') }}">Profile</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Log out</a></li>
+            <li><form method="post" action="{{url('logout')}}">@csrf <button class="dropdown-item" type="submit">Log out</button></form></li>
           </ul>
         </li>
         

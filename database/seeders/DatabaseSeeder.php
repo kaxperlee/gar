@@ -4,6 +4,9 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use App\Models\AuxCanal;
+use App\Models\AuxCaracter;
+use App\Models\Incidencia;
 use Illuminate\Database\Seeder;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
@@ -18,13 +21,47 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        
+        $this->call(CodigoSeeder::class);
+
         $user = new User();
         $user->name = "Admin";
         $user->email = "admin@admin.com";
         $user->password = Hash::make('password');
         $user->save();
 
-        $this->call(CodigoSeeder::class);
+        $user = new AuxCanal();
+        $user->Canal = "Email";
+        $user->idCanal = "email";
+        $user->save();
+        $user = new AuxCanal();
+        $user->Canal = "Fax";
+        $user->idCanal = "fax";
+        $user->save();
+        $user = new AuxCanal();
+        $user->Canal = "Papel";
+        $user->idCanal = "papel";
+        $user->save();
+        $user = new AuxCanal();
+        $user->Canal = "Teléfono";
+        $user->idCanal = "telefono";
+        $user->save();
+        $user = new AuxCanal();
+        $user->Canal = "Otro";
+        $user->idCanal = "otro";
+        $user->save();
+
+        $user = new AuxCaracter();
+        $user->Caracter = "Normal";
+        $user->idCaracter = "normal";
+        $user->save();
+
+        $user = new AuxCaracter();
+        $user->Caracter = "Urgente";
+        $user->idCaracter = "urgente";
+        $user->save();
+
+        Incidencia::factory(24)->create();
+
+
     }
 }
