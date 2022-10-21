@@ -19,8 +19,20 @@ return new class extends Migration
             $table->string("Epigrafe",10);
             $table->date('Fecha');
             $table->string("Codigo",200);
-
-            $table->string('Estado',8);
+            $table->string("Caracter",20);
+            $table->text('Descripcion');
+            $table->text('RiesgoA');
+            $table->string("InformarA",100);
+            $table->string("Remitente",100);
+            $table->string("Canal",100);
+            $table->date("FechaT");
+            $table->string("Propuesta",100);
+            $table->string("NivelRP",100);
+            $table->text('ComunicarA');
+            $table->text('Autoria');
+            $table->text('Observaciones');
+            $table->text('Propuestas');
+            $table->enum('Estado', ['abierto', 'cerrado']);
             $table->timestamps();
         });
     }

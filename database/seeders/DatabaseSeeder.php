@@ -4,9 +4,12 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use App\Models\Actividadesriesgo;
 use App\Models\AuxCanal;
 use App\Models\AuxCaracter;
+use App\Models\Control;
 use App\Models\Incidencia;
+use App\Models\Seguimiento;
 use Illuminate\Database\Seeder;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
@@ -61,6 +64,9 @@ class DatabaseSeeder extends Seeder
         $user->save();
 
         Incidencia::factory(24)->create();
+        Seguimiento::factory(19)->create();
+        Actividadesriesgo::factory(120)->create();
+        Control::factory(120)->create();
 
 
     }

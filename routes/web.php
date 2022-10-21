@@ -6,6 +6,7 @@ use App\Http\Controllers\IncidenciasController;
 use App\Http\Controllers\InformesController;
 use App\Http\Controllers\DocumentosController;
 use App\Http\Controllers\FilesController;
+use App\Http\Controllers\SeguimientoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,6 +40,7 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/grupo/{idCodigo}', [Inici
 Route::middleware(['auth:sanctum', 'verified'])->get('/codigos/{id}', [InicioController::class, 'show'])->name('codigos.show');
 
 Route::middleware(['auth:sanctum', 'verified'])->delete('/files/destroy/{id}', [ FilesController::class, 'destroy'])->name('files.destroy');
+Route::middleware(['auth:sanctum', 'verified'])->get('/files/download/{id}', [ FilesController::class, 'download'])->name('files.download');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/incidencias', [IncidenciasController::class, 'index'])->name('incidencias.index');
 Route::middleware(['auth:sanctum', 'verified'])->get('/incidencias/create/{id}', [IncidenciasController::class, 'create'])->name('incidencias.create');
@@ -48,6 +50,13 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/incidencias/{id}', [Incid
 Route::middleware(['auth:sanctum', 'verified'])->get('/incidencias/edit/{id}', [IncidenciasController::class, 'edit'])->name('incidencias.edit');
 Route::middleware(['auth:sanctum', 'verified'])->put('/incidencias/update', [IncidenciasController::class, 'update'])->name('incidencias.update');
 Route::middleware(['auth:sanctum', 'verified'])->get('/incidencias/delete/{id}', [IncidenciasController::class, 'destroy'])->name('incidencias.destroy');
+
+//Route::middleware(['auth:sanctum', 'verified'])->get('/seguimiento/{id}/{tab}', [SeguimientoController::class, 'show2'])->name('seguimiento.show2');
+
+Route::middleware(['auth:sanctum', 'verified'])->get('/seguimiento/edit/{id}', [SeguimientoController::class, 'edit'])->name('seguimiento.edit');
+Route::middleware(['auth:sanctum', 'verified'])->get('/seguimiento/delete/{id}', [SeguimientoController::class, 'destroy'])->name('seguimiento.destroy');
+Route::middleware(['auth:sanctum', 'verified'])->get('/seguimiento', [SeguimientoController::class, 'index'])->name('seguimiento.index');
+Route::middleware(['auth:sanctum', 'verified'])->get('/seguimiento/{id}/{tab?}', [SeguimientoController::class, 'show'])->name('seguimiento.show');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/informes', [InformesController::class, 'index']);
 

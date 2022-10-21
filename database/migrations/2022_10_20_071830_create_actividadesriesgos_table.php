@@ -13,12 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('files', function (Blueprint $table) {
+        Schema::create('actividadesriesgos', function (Blueprint $table) {
             $table->id();
-            $table->Integer('id_Codigo');
-            $table->string("Ruta",200);
-            $table->string("Nombre",150);
-            $table->enum('Tipo',['incidencia','seguimiento'])->nullable();
+            $table->integer('id_Seguimiento');
+            $table->string('Nombre');
+            $table->enum('Estado',['checked','']);
             $table->timestamps();
         });
     }
@@ -30,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('files');
+        Schema::dropIfExists('actividadesriesgos');
     }
 };

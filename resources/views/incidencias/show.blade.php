@@ -12,14 +12,14 @@
 <x-cab2 texto="Clientes recientes" />
 
 <div class="d-flex flex-row-reverse mb-3">
-    <a type="button" href="{{route('incidencias.destroy', $incidencias)}}" class="btn btn-primary btn-sm me-2">Delete</a>
-    <a type="button" href="#" class="btn btn-primary btn-sm me-2">Archivar</a>
-    <a type="button" href="{{route('incidencias.edit', $incidencias)}}" class="btn btn-primary btn-sm me-2">Edit</a>
+    <a type="button" href="{{route('incidencias.destroy', $incidencias)}}" class="btn btn-primary btn-sm me-2"><i class="fa-solid fa-trash"></i> Delete</a>
+    <a type="button" href="#" class="btn btn-primary btn-sm me-2"><i class="fa-solid fa-box-archive"></i> Archivar</a>
+    <a type="button" href="{{route('incidencias.edit', $incidencias)}}" class="btn btn-primary btn-sm me-2"><i class="fa-solid fa-pen-to-square"></i> Edit</a>
 </div>
 
 
-
-<div class="container">
+<div class="px-3">
+<div class="container-fluid">
   <div class="row">
     <div class="col-3 my-2">
         <label for="idCodigo">idCodigo</label><br>
@@ -48,7 +48,7 @@
     </div>
     <div class="col-6 my-2">
         <label for="riesgoa">Riesgo afectado / Conducta delictiva:</label><br>
-        <textarea style='resize: none;' name="riesgoa" class="form-control" id="riesgoa" rows="3" readonly>{{$incidencias->Descripcion}}</textarea>
+        <textarea style='resize: none;' name="riesgoa" class="form-control" id="riesgoa" rows="3" readonly>{{$incidencias->RiesgoA}}</textarea>
     </div>
 
     <div class="col-6 my-2">
@@ -95,9 +95,13 @@
         <label for="propuestas">Propuestas:</label><br>
         <textarea style='resize: none;' name="propuestas" class="form-control" id="propuestas" rows="3" readonly>{{$incidencias->Propuestas}}</textarea>
     </div>
-    
+    <div class="d-flex flex-row-reverse mt-3">
+        <a type="button" href="{{route('incidencias.destroy', $incidencias)}}" class="btn btn-primary btn-sm me-2"><i class="fa-solid fa-trash"></i> Delete</a>
+        <a type="button" href="#" class="btn btn-primary btn-sm me-2"><i class="fa-solid fa-box-archive"></i> Archivar</a>
+        <a type="button" href="{{route('incidencias.edit', $incidencias)}}" class="btn btn-primary btn-sm me-2"><i class="fa-solid fa-pen-to-square"></i> Edit</a>
+    </div>
 </div>
-
+</div>
 <div class="p-1">
     <div class="col-12 my-4">
         <div class="h-100 p-5 bg-light border rounded-3">
@@ -105,14 +109,14 @@
         @foreach ($files as $file)
         <form method="POST" action="{{route('files.destroy',$file)}}">
             <div class="input-group mb-3">
-                <a href="../{{$file->Ruta}}" target="_blank" class="btn btn-primary">Ver</a>
+                <a href="{{route('files.download',['id' => $file->id])}}" class="btn btn-primary">Ver {{$file->id}}</a>
                 <input type="text" class="form-control" value="{{$file->Nombre}}" readonly aria-describedby="button-addon2">
                 @csrf
                 @method('delete')
                 <input type="hidden" name="id" value="{{$incidencias->id}}">
                 <button class="btn btn-danger" type="submit"><i class="fa-solid fa-circle-xmark"></i></button>
-            </div> 
-        </form>       
+            </div>
+        </form>
         @endforeach
             <h5 class="mt-5">Añadir fichero</h5>
             <form method="POST" enctype="multipart/form-data" id="upload-file" action="{{route('incidencias.fileform')}}">

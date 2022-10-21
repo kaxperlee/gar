@@ -1,9 +1,9 @@
 @extends('layouts.main')
 
 @section('sidebar')
-   
+
     <x-sb-codigos />
-       
+
 @endsection
 
 @section('main')
@@ -17,7 +17,7 @@
         <th>Descripción</th>
         <th>Remitente</th>
         <th width="10" colspan="2"></th>
-        
+
     </tr>
 @foreach ($codigos as $codigo)
     <tr>
@@ -26,8 +26,9 @@
         <td>{{ $codigo->Fecha }}</td>
         <td><a href="{{route('incidencias.show',$codigo)}}">{{ $codigo->Descripcion }}</a></td>
         <td>{{ $codigo->Remitente }}</td>
-        <td><a href="{{route('incidencias.edit', $codigo->id)}}" class="btn btn-primary btn-sm" role="button" aria-disabled="true"><i class="fa-solid fa-pen-to-square"></i></a></td>
-        <td><a href="{{route('incidencias.destroy', $codigo->id)}}" class="btn btn-primary btn-sm" role="button" aria-disabled="true"><i class="fa-solid fa-trash"></i></a></td>
+        <td><a href="{{route('incidencias.edit', $codigo->id)}}" class="color-prymary" role="button" aria-disabled="true"><i class="fa-regular fa-pen-to-square"></i></a></td>
+        <td><a href="{{route('incidencias.destroy', $codigo->id)}}" class="color-prymary" role="button" aria-disabled="true"><i class="fa-solid fa-trash"></i></a></td>
     </tr>
 @endforeach
+</table>
 @endsection

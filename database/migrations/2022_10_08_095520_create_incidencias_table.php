@@ -32,7 +32,7 @@ return new class extends Migration
             $table->text('Autoria');
             $table->text('Observaciones');
             $table->text('Propuestas');
-            $table->string('Estado',8);
+            $table->enum('Estado', ['abierto', 'cerrado']);
             $table->timestamps();
         });
     }
