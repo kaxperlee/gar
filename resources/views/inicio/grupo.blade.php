@@ -1,9 +1,9 @@
 @extends('layouts.main')
 
 @section('sidebar')
-   
+
     <x-sb-codigos />
-       
+
 @endsection
 
 @section('main')
@@ -11,7 +11,7 @@
 <x-cab2 texto="Clientes recientes" />
 <table class="table table-hover" width="100%">
     <tr>
-        <th>Grupo</th>
+        <th>Grupos</th>
         <th>Nombre</th>
         <th>Epígrafe</th>
         <th>Descripción</th>

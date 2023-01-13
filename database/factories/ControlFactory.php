@@ -19,7 +19,7 @@ class ControlFactory extends Factory
     {
         $seguimiento = Seguimiento::all()->random();
         return [
-            'id_Seguimiento' => $seguimiento->id,
+            'seguimiento_id' => $seguimiento->id,
             'Nombre' => $this->faker->text(230),
             'Estado' => $this->faker->randomElement(['checked','']),
         ];

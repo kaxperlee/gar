@@ -2,7 +2,9 @@
 
 namespace Database\Factories;
 
-use App\Models\Codigo;
+use App\Models\Canal;
+use App\Models\Caracter;
+use App\Models\Delito;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,20 +19,22 @@ class IncidenciaFactory extends Factory
      */
     public function definition()
     {
-        $riesgo = Codigo::all()->random();
+        $riesgo = Delito::all()->random();
+        $caracter = Caracter::all()->random();
+        $canal = Canal::all()->random();
 
         return [
            // 'idCodigo' => Codigo::all()->random()->id,
-            'idCodigo' => $riesgo->idCodigo,
-            'Epigrafe' => $riesgo->Epigrafe,
+            'delito_id' => $riesgo->id,
+
             'Fecha' => $this->faker->dateTimeThisYear('+1 month'),
-            'Codigo' => $riesgo->Codigo,
-            'Caracter' => $this->faker->randomElement(['Norma','Urgente']),
+
+            'caracter_id' => $caracter->id,
             'Descripcion' => $this->faker->text(120),
             'RiesgoA' => $this->faker->text(120),
             'InformarA' => $this->faker->word(20),
             'Remitente' => $this->faker->word(20),
-            'Canal' => $this->faker->randomElement(['Email','Fax', 'Papel','Otro']),
+            'canal_id' => $canal->id,
             'FechaT' => $this->faker->dateTimeThisYear('+1 month'),
             'Propuesta' => $this->faker->sentence(),
             'NivelRP' => $this->faker->randomElement(['Bajo','Normal', 'Alto']),

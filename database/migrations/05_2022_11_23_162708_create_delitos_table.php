@@ -13,10 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('aux_canals', function (Blueprint $table) {
+        Schema::create('delitos', function (Blueprint $table) {
             $table->id();
-            $table->string("Canal",15);
-            $table->string("idCanal",15);
+            $table->string('Epigrafe',6);
+            $table->string('Delito',100);
+            $table->string('Codigo',10);
+            $table->text('Descripcion',1000);
             $table->timestamps();
         });
     }
@@ -28,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('aux_canals');
+        Schema::dropIfExists('delitos');
     }
 };

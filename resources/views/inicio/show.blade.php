@@ -1,9 +1,9 @@
 @extends('layouts.main')
 
 @section('sidebar')
-   
+
     <x-sb-codigos />
-       
+
 @endsection
 
 @section('main')
@@ -20,9 +20,9 @@
 @foreach ($codigos as $codigo)
     <tr>
         <td>{{ $codigo->id }}</td>
-        <td>{{ $codigo->idCodigo }}</td>
-        <td><a href="{{route('incidencias.create', ['id' => $id])}}">{{ $codigo->Codigo }}</a></td>
         <td>{{ $codigo->Epigrafe }}</td>
+        <td><a href="{{route('incidencias.create', ['id' => $id])}}">{{ $codigo->Delito }}</a></td>
+        <td>{{ $codigo->Codigo }}</td>
         <td>{{ $codigo->Descripcion }}</td>
     </tr>
 @endforeach

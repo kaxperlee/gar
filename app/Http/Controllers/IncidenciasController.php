@@ -2,13 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\AuxCanal;
-use App\Models\AuxCaracter;
+use App\Models\Canal;
+use App\Models\Caracter;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
-use App\Models\Codigo;
+use App\Models\Delito;
 use App\Models\File;
 use App\Models\Incidencia;
+use App\Models\Informe;
+use Illuminate\Support\Facades\Storage;
+use PDF;
+
+use function GuzzleHttp\Promise\all;
 
 class IncidenciasController extends Controller
 {
@@ -19,34 +24,49 @@ class IncidenciasController extends Controller
         return view('incidencias.index',['codigos' => $codigo]);
     }
 
+    public function search(Request $request){
+        $busqueda = explode ( ' ', $request->riesgo);
+
+        $delitos = Delito::select('id','Epigrafe','Delito','Codigo','Descripcion');
+
+        foreach ($busqueda as $id){
+            $delitos->where('Codigo', 'LIKE', '%'.$id.'%');
+        }
+
+        $delitos = $delitos->get();
+
+        return view('incidencias.search', compact('delitos','busqueda'));
+    }
+
     public function create($id)
     {
+        $caracter = Caracter::pluck('Nombre','id');
+        $canal = Canal::pluck('Nombre','id');
         //$codigos = Codigo::where('id',$id)->get();
-        $codigos = Codigo::find($id);
-        return view('incidencias.create',['codigos' => $codigos]);
+        $delito = Delito::find($id);
+        return view('incidencias.create',compact('delito','caracter','canal'));
 
     }
 
     public function store(Request $request)
     {
+        //return $request->all();
         $incidencia = new Incidencia();
-        $incidencia->idCodigo = $request->idCodigo;
-        $incidencia->Epigrafe = $request->epigrafe;
-        $incidencia->Fecha = $request->fecha;
-        $incidencia->Codigo = $request->codigo;
-        $incidencia->Caracter = $request->caracter;
-        $incidencia->Descripcion = $request->descripcion;
-        $incidencia->RiesgoA = $request->riesgoa;
-        $incidencia->InformarA = $request->informara;
-        $incidencia->Remitente = $request->remitente;
-        $incidencia->Canal = $request->canal;
-        $incidencia->FechaT = $request->fechat;
-        $incidencia->Propuesta = $request->propuesta;
-        $incidencia->NivelRP = $request->nivelrp;
-        $incidencia->ComunicarA = $request->comunicara;
-        $incidencia->Autoria = $request->autoria;
-        $incidencia->Observaciones = $request->observaciones;
-        $incidencia->Propuestas = $request->propuestas;
+        $incidencia->Fecha = $request->Fecha;
+        $incidencia->delito_id = $request->delito_id;
+        $incidencia->caracter_id = $request->caracter_id;
+        $incidencia->Descripcion = $request->Descripcion;
+        $incidencia->RiesgoA = $request->RiesgoA;
+        $incidencia->InformarA = $request->InformarA;
+        $incidencia->Remitente = $request->Remitente;
+        $incidencia->canal_id = $request->canal_id;
+        $incidencia->FechaT = $request->FechaT;
+        $incidencia->Propuesta = $request->Propuesta;
+        $incidencia->NivelRP = $request->NivelRP;
+        $incidencia->ComunicarA = $request->ComunicarA;
+        $incidencia->Autoria = $request->Autoria;
+        $incidencia->Observaciones = $request->Observaciones;
+        $incidencia->Propuestas = $request->Propuestas;
         $incidencia->save();
         return redirect()->route('incidencias.show', $incidencia);
         //return $incidencia;
@@ -66,7 +86,7 @@ class IncidenciasController extends Controller
         $save->Ruta = 'storage'.$array[1];
 
         $save->save();
-        
+
         return redirect()->route('incidencias.show',$id);
         //return $incidencia;
     }
@@ -74,30 +94,58 @@ class IncidenciasController extends Controller
 
     public function show($id)
     {
-        $incidencias = Incidencia::find($id);
-        $files =  File::where('id_Codigo',$incidencias->id)->get();
-        
-        return view('incidencias.show', compact('incidencias','files'));
+        $incidencia = Incidencia::find($id);
+        $files =  File::where('id_Codigo',$incidencia->id)->get();
+        $informes = Informe::where('id_incidencia',$id)->get();
+
+        return view('incidencias.show', compact('incidencia','files','informes'));
     }
 
     public function edit($id) {
 
-        $caracter = AuxCaracter::pluck('Caracter','idCaracter');
-        $canal = AuxCanal::pluck('Canal','idCanal');
-        $incidencias = Incidencia::find($id);
-        $files =  File::where('id_Codigo',$incidencias->id)->get();
+        $caracter = Caracter::pluck('Nombre','id');
+        $canal = Canal::pluck('Nombre','id');
+        $incidencia = Incidencia::find($id);
+        $files =  File::where('id_Codigo',$incidencia->id)->get();
 
-        return view('incidencias.edit', compact('incidencias','files','caracter','canal'));
+        return view('incidencias.edit', compact('incidencia','files','caracter','canal'));
        // return "<h1>Edit: ".$id."</h1>";
     }
-    
-    public function update(Request $request){
-        
-        $incidencias = Incidencia::find($request->id);
-        $incidencias->update($request->all());
+
+    public function update(Request $request, Incidencia $incidencia){
+
+        $incidencia = Incidencia::find($request->id);
+        //$incidencia->update($request->all());
+        $incidencia->update(['Fecha' => $request->Fecha, 'caracter_id' => $request->caracter_id, 'canal_id' => $request->canal_id,
+        'Descripcion' =>  $request->Descripcion,'RiesgoA' =>  $request->RiesgoA,'InformarA' =>  $request->InformarA, 'Remitente' => $request->Remitente,
+        'FechaT' => $request->FechaT, 'Propuesta' => $request->Propuesta, 'NivelRP' => $request->NivelRP, 'ComunicarA' => $request->ComunicarA,
+        'Autoria' => $request->Autoria, 'Observaciones' => $request->Observaciones, 'Propuestas' => $request->Propuestas]);
         return redirect()->route('incidencias.show',$request->id);
     }
     public function destroy($id) {
+
         return "<h1>Delete: ".$id."</h1>";
+    }
+
+    public function storeinforme(Request $request){
+        $informe = new Informe();
+        $informe->id_incidencia = $request->id_incidencia;
+        $informe->Obs = $request->Obs;
+        $informe->Fecha = date("Y-m-d");
+        $informe->save();
+
+        $informes = Informe::where('id_incidencia',$request->id_incidencia)->get();
+        //$fiestas = Evento::all();
+        //$fecha = "2023";
+        //$pdf = PDF::loadView('incidencias.informe', compact('informe','informes'));
+        //return view("calendario/informe", compact('fecha'));
+        //return $pdf->download('CalendarioLaboral2023.pdf');
+        $pdf = PDF::loadView('incidencias.informe', ['informe' => $informe,'informes' => $informes])->download()->getOriginalContent();
+        Storage::disk('public')->put('informes/'.$informe->id.'.pdf', $pdf);
+
+
+        //return $pdf->save('/informes/my_stored_file.pdf')->stream('download.pdf');
+
+        return redirect()->route('incidencias.show', $request->id_incidencia);
     }
 }

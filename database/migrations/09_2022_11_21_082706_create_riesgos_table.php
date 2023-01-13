@@ -13,11 +13,18 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('actividadesriesgos', function (Blueprint $table) {
+        Schema::create('riesgos', function (Blueprint $table) {
             $table->id();
-            $table->integer('id_Seguimiento');
-            $table->string('Nombre');
-            $table->enum('Estado',['checked','']);
+            $table->string('Nombre',400);
+            $table->string('Descripcion',1000);
+
+            $table->tinyInteger('Estado')->nullable();
+
+            $table->unsignedBigInteger('seguimiento_id')->nullable();
+            $table->foreign('seguimiento_id')
+                ->references('id')->on('seguimientos')
+                ->onDelete('cascade');
+
             $table->timestamps();
         });
     }
@@ -29,6 +36,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('actividadesriesgos');
+        Schema::dropIfExists('riesgos');
     }
 };

@@ -1,11 +1,11 @@
 <div>
     <div class="mb-4">
         <x-cab1 texto="Nueva incidencia" />
-        <form action="{{route('codigos.store')}}" method="POST">
+        <form action="{{route('incidencias.search')}}" method="POST">
             @csrf
             <div class="form-group mb-3">
                 <label for="">
-                    <span><strong>Código riesgo:</strong> </br></span> 
+                    <span><strong>Código delito:</strong> </br></span>
                     <input class="form-control mt-2" type="text" name="riesgo">
                 </label>
             </div>
@@ -13,12 +13,6 @@
             <input type="reset" name="mysubmit" value="Reset"  class="btn btn-primary btn-sm" />
         </form>
     </div>
-    <x-cab1 texto="Riesgos" />
-    <ul>
-    @foreach ($codigos as $codigo)
-    <li style='list-style-type: none; margin-left:-30px; padding-bottom:4px;'>
-        <a style="text-decoration-line: none"  href="{{route('codigos.grupo', $codigo->idCodigo)}}">{{$codigo->idCodigo }}. {{ $codigo->idCodigo2 }}</a>
-    </li>
-    @endforeach
-    </ul>
+
+
 </div>

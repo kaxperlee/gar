@@ -14,37 +14,40 @@
 
 
 <div class="px-3">
-{!! Form::model($incidencias,['route' => ['incidencias.update',$incidencias],'method'=>'put']) !!}
+{!! Form::model($incidencia,['route' => ['incidencias.update',$incidencia],'method'=>'put']) !!}
 
 <div class="d-flex flex-row-reverse mb-3">
     <button type="submit"  class="btn btn-primary btn-sm me-2"><i class="fa-solid fa-ban"></i> Actualizar</button>
-    <a type="button" href="{{route('incidencias.show', $incidencias)}}" class="btn btn-primary btn-sm me-2"><i class="fa-solid fa-arrows-rotate"></i> Cancelar</a>
+    <a type="button" href="{{route('incidencias.show', $incidencia)}}" class="btn btn-primary btn-sm me-2"><i class="fa-solid fa-arrows-rotate"></i> Cancelar</a>
 </div>
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col-3 my-2">
-            {!! Form::label('id','id:') !!}
-            {!! Form::text('id',NULL,['class'=>'form-control']) !!}
-        </div>
-        <div class="col-3 my-2">
+        <div class="col-2 my-2">
+            {!! Form::setModel($incidencia['Delito']) !!}
             {!! Form::label('epigrafe','Epigrafe:') !!}
-            {!! Form::text('Epigrafe',NULL,['class'=>'form-control']) !!}
+            {!! Form::text('Epigrafe',NULL,['class'=>'form-control','readonly']) !!}
         </div>
-        <div class="col-3 my-2">
+        <div class="col-10 my-2">
+            {!! Form::setModel($incidencia['Delito']) !!}
+            {!! Form::label('Delito','Delito:') !!}
+            {!! Form::text('Delito',NULL,['class'=>'form-control','readonly']) !!}
+        </div>
+        <div class="col-4 my-2">
+            {!! Form::setModel($incidencia) !!}
             {!! Form::label('fecha','Fecha:') !!}
             {!! Form::date('Fecha',NULL,['class'=>'form-control']) !!}
         </div>
-
-        <div class="col-3 my-2">
-            {!! Form::label('Caracter','Caracter:') !!}
-            {!! Form::select('Caracter',$caracter,NULL,['class'=>'form-control']) !!}
+         <div class="col-4 my-2">
+            {!! Form::label('caracter_id','Caracter:') !!}
+            {!! Form::select('caracter_id',$caracter,NULL,['class'=>'form-control']) !!}
         </div>
-        <div class="col-12 my-2">
-            {!! Form::label('codigo','Codigo:') !!}
-            {!! Form::text('Codigo',NULL,['class'=>'form-control']) !!}
+        <div class="col-4 my-2">
+            {!! Form::label('canal_id','Canal:') !!}
+            {!! Form::select('canal_id',$canal,NULL,['class'=>'form-control']) !!}
         </div>
         <div class="col-6 my-2">
+            {!! Form::setModel($incidencia) !!}
             {!! Form::label('Descripcion','Descripcion:') !!}
             {!! Form::textarea('Descripcion',NULL,['class'=>'form-control','rows'=>'3', 'style'=>'resize: none']) !!}
         </div>
@@ -60,19 +63,16 @@
             {!! Form::label('Remitente','Remitente:') !!}
             {!! Form::text('Remitente',NULL,['class'=>'form-control']) !!}
         </div>
-        <div class="col-3 my-2">
-            {!! Form::label('Canal','Canal:') !!}
-            {!! Form::select('Canal',$canal,NULL,['class'=>'form-control']) !!}
-        </div>
-        <div class="col-3 my-2">
+
+        <div class="col-4 my-2">
             {!! Form::label('FechaT','Fecha de tramitación:') !!}
             {!! Form::date('FechaT',NULL,['class'=>'form-control']) !!}
         </div>
-        <div class="col-3 my-2">
+        <div class="col-4 my-2">
             {!! Form::label('Propuesta','Propuesta:') !!}
             {!! Form::text('Propuesta',NULL,['class'=>'form-control']) !!}
         </div>
-        <div class="col-3 my-2">
+        <div class="col-4 my-2">
             {!! Form::label('NivelRP','Nivel de riesgo penal:') !!}
             {!! Form::text('NivelRP',NULL,['class'=>'form-control']) !!}
         </div>
@@ -96,8 +96,9 @@
 </div>
 <div class="d-flex flex-row-reverse mt-3">
     <button type="submit"  class="btn btn-primary btn-sm me-2"><i class="fa-solid fa-ban"></i> Actualizar</button>
-    <a type="button" href="{{route('incidencias.show', $incidencias)}}" class="btn btn-primary btn-sm me-2"><i class="fa-solid fa-arrows-rotate"></i> Cancelar</a>
+    <a type="button" href="{{route('incidencias.show', $incidencia)}}" class="btn btn-primary btn-sm me-2"><i class="fa-solid fa-arrows-rotate"></i> Cancelar</a>
 </div>
+{!! Form::hidden('id',NULL) !!}
 {!! Form::close() !!}
 </div>
 
@@ -114,7 +115,7 @@
                 <input type="text" class="form-control" value="{{$file->Nombre}}" readonly aria-describedby="button-addon2">
                 @csrf
                 @method('delete')
-                <input type="hidden" name="id" value="{{$incidencias->id}}">
+                <input type="hidden" name="id" value="{{$incidencia->id}}">
                 <button class="btn btn-danger" type="submit"><i class="fa-solid fa-circle-xmark"></i></button>
             </div>
         </form>
@@ -124,7 +125,7 @@
                 <div class="container">
                     <div class="row">
                         @csrf
-                        <input type="hidden" name="id" value="{{$incidencias->id}}">
+                        <input type="hidden" name="id" value="{{$incidencia->id}}">
                         <div class="col-12 my-2">
                             <input class="form-control" type="file" name="file" id="file" placeholder="Selecciona un fichero">
                         </div>

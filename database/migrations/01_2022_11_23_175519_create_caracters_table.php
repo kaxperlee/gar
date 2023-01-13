@@ -13,10 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('aux_caracters', function (Blueprint $table) {
+        Schema::create('caracters', function (Blueprint $table) {
             $table->id();
-            $table->string("Caracter",15);
-            $table->string("idCaracter",15);
+            $table->string('Nombre',40);
             $table->timestamps();
         });
     }
@@ -28,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('aux_caracters');
+        Schema::dropIfExists('caracters');
     }
 };

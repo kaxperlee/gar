@@ -1,0 +1,5 @@
+1. Usamos el buscador de seguimientos en el SB para filtrar los delitos 
+2. Obtendremos una listra filtrada o una completa.
+3. En la tabla, en la ultima columna tendremos un boton para dar de alta el delito 
+como seguimiento.
+4.  

@@ -13,13 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('codigos', function (Blueprint $table) {
+        Schema::create('informes', function (Blueprint $table) {
             $table->id();
-            $table->string("idCodigo",4);
-            $table->string("idCodigo2",100);
-            $table->string("Codigo",100);
-            $table->string("Epigrafe",5);
-            $table->text("Descripcion");
+            $table->integer('id_incidencia');
+            $table->date('Fecha')->nullable();
+            $table->text('Obs')->nullValue();
             $table->timestamps();
         });
     }
@@ -31,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('codigos');
+        Schema::dropIfExists('informes');
     }
 };

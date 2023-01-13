@@ -1,6 +1,103 @@
 @page {
-    margin-left: 0.5cm;
-    margin-right: 0.5cm;
-    margin-top: 0.5cm;
+    margin-left: 0.8cm;
+    margin-right: 0.8cm;
+    margin-top: 0.8cm;
     margin-bottom: 0cm;
+}
+
+
+.HeadTable {
+    border: 0px solid #ccc;
+    border-collapse: collapse;
+    width:100%;
+    margin-bottom:5px;
+}
+.HeadTable2 {
+    border: 0px solid #ccc;
+    border-collapse: collapse;
+    width:100%;
+    margin-bottom:5px;
+    margin-top:5px;
+    border-spacing: 10px 5px;
+}
+.HeadLogo{
+    border: 0px solid #444;
+    margin-bottom:auto,
+}
+.HeadTitulo{
+    text-transform: uppercase;
+    border: 0px solid #444;
+    text-align: right;
+    color: #3a5e43;
+}
+ #MesCal {
+    background-color:#3a5e43;
+    text-align:center;
+    color: white;
+    margin:0px;
+    padding:4px;
+    font-size: 14px;
+    text-transform: uppercase;
+    font-weight: 400;
+ }
+ #ThCal {
+    margin:0px;
+    color: #3a5e43;
+    padding:2px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 600;
+ }
+ #TdCal{
+    text-align: center;
+    padding-bottom:1px;
+}
+ .domingo{
+    color:white;
+    background-color: #3a5e43;
+ }
+ .nacional{
+    color: white;
+    background-color: #ce2905;
+ }
+ .local{
+    color: white;
+    background-color: #CA8400;
+ }
+#dias{
+    color: #ce2905;
+    font-size: 15px;
+    padding: 3px 3px;
+    font-weight: 600;
+}
+#dias2{
+    color: #CA8400;
+    font-size: 15px;
+    padding: 3px 3px;
+    font-weight: 600;
+}
+#diasmes{
+    color: #333;
+}
+.DiasCab{
+    font-weight: 400;
+    text-transform: uppercase;
+    color: white;
+    padding: 0px 5px;
+}
+.DiasCab2{
+    font-weight: 400;
+    text-transform: uppercase;
+    color:white;
+    padding: 0px 5px;
+}
+.ThCab{
+    background-color: #3a5e43;
+    padding: 5px 0px;
+    color: white;
+    text-align: center;
+    border-left: 1px solid #3a5e43;
+}
+#margenlocal{
+    border-left: 1px solid #3a5e43;
 }

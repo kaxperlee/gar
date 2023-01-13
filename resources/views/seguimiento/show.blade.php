@@ -9,17 +9,20 @@
 @section('main')
 
 <x-cab1 texto="Seguimiento" />
-<x-cab2 texto="Clientes recientes {{$tabulador['mon']}}" />
+<x-cab2 texto="{{$seguimiento->Delito->Epigrafe}}/{{$seguimiento->Delito->Delito}}" />
 
 <ul class="nav nav-tabs" id="myTab" role="tablist">
     <li class="nav-item" role="presentation">
-        <button class="nav-link {{$tabulador['exp']}}" id="exp-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Expediente</button>
+        <button class="nav-link {{$tabulador['exp']}}" id="exp-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Delito</button>
     </li>
     <li class="nav-item" role="presentation">
-        <button class="nav-link {{$tabulador['act']}}" id="actividad-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Actividad</button>
+        <button class="nav-link {{$tabulador['act']}}" id="actividad-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Actividades de riesgo</button>
     </li>
     <li class="nav-item " role="presentation">
-        <button class="nav-link {{$tabulador['mon']}}" id="control-tab" data-bs-toggle="tab" data-bs-target="#contact-tab-pane" type="button" role="tab" aria-controls="contact-tab-pane" aria-selected="false">Monitorización</button>
+        <button class="nav-link {{$tabulador['acl']}}" id="actual-tab" data-bs-toggle="tab" data-bs-target="#actual-tab-pane" type="button" role="tab" aria-controls="actual-tab-pane" aria-selected="false">Controles actuales</button>
+    </li>
+    <li class="nav-item " role="presentation">
+        <button class="nav-link {{$tabulador['mon']}}" id="control-tab" data-bs-toggle="tab" data-bs-target="#contact-tab-pane" type="button" role="tab" aria-controls="contact-tab-pane" aria-selected="false">Controles propuestos</button>
     </li>
     <li class="nav-item " role="presentation">
         <button class="nav-link {{$tabulador['fil']}}" id="ficheros-tab" data-bs-toggle="tab" data-bs-target="#ficheros-tab-pane" type="button" role="tab" aria-controls="ficheros-tab-pane" aria-selected="false">Ficheros</button>
@@ -28,125 +31,144 @@
 <div class="px-3">
     <div class="container-fluid">
         <div class="tab-content mt-3" id="myTabContent">
-            <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="exp-tab" tabindex="0">
+            <div class="tab-pane fade {{$tabulador['exp']}}" id="home-tab-pane" role="tabpanel" aria-labelledby="exp-tab" tabindex="0">
                 <div class="d-flex mb-3" style='width:100%;background-color:white'>
-                    <x-cab3 texto="{{$seguimientos->Codigo}}" />
+                    <x-cab3 texto="Delito" />
                     <a type="button" href="{{route('seguimiento.index')}}" class="btn btn-primary btn-sm me-2"><i class="fa-solid fa-trash"></i> Delete</a>
                     <a type="button" href="#" class="btn btn-primary btn-sm me-2"><i class="fa-solid fa-box-archive"></i> Archivar</a>
                     <a type="button" href="{{route('seguimiento.index')}}" class="btn btn-primary btn-sm me-2"><i class="fa-solid fa-pen-to-square"></i> Edit</a>
                 </div>
                 <div class="row">
-                    <div class="col-3 my-2">
-                        <label for="idCodigo">idCodigo</label><br>
-                        <input  class="form-control" type="text" name="idCodigo" value="{{$seguimientos->id}}" readonly>
+                    <div class="col-4 my-2">
+                        <label for="idCodigo">id: </label><br>
+                        <input  class="form-control" type="text" name="idCodigo" value="{{$seguimiento->id}}" readonly>
                     </div>
-                    <div class="col-3 my-2">
+                    <div class="col-4 my-2">
                         <label for="epigrafe">Epigrafe</label><br>
-                        <input  class="form-control" type="text" name="epigrafe" value="{{$seguimientos->Epigrafe}}" readonly>
+                        <input  class="form-control" type="text" name="epigrafe" value="{{$seguimiento->Delito->Epigrafe}}" readonly>
                     </div>
-                    <div class="col-3 my-2">
-                        <label for="fecha">Fecha (dd/mm/aaaa)</label><br>
-                        <input class="form-control" type="date" name="fecha" value="{{$seguimientos->Fecha}}" readonly>
-                    </div>
-                    <div class="col-3 my-2">
-                        <label for="caracter">Caracter</label><br>
-                        <input class="form-control" type="text" name="fecha" value="{{$seguimientos->Caracter}}" readonly>
+                    <div class="col-4 my-2">
+                        <label for="Codigo">Codigo</label><br>
+                        <input class="form-control" widt="100%" type="text" name="Codigo"  value={{$seguimiento->Delito->Codigo}} readonly>
                     </div>
                     <div class="col-12 my-2">
-                        <label for="Codigo">Codigo</label><br>
-                        <input class="form-control" widt="100%" type="text" name="Codigo"  value="{{$seguimientos->Codigo}}" readonly>
+                        <label for="caracter">Delito</label><br>
+                        <input class="form-control" type="text" name="fecha" value="{{$seguimiento->Delito->Delito}}" readonly>
                     </div>
-                    <div class="col-6 my-2">
+                    <div class="col-12 my-2">
                         <label for="descripcion">Descripción:</label><br>
-                        <textarea style='resize: none;' name="descripcion" class="form-control" id="descripcion" rows="3"  readonly>{{$seguimientos->Descripcion}}</textarea>
-
+                        <textarea style='resize: none;' name="descripcion" class="form-control" id="descripcion" rows="2"  readonly>{{$seguimiento->Delito->Descripcion}}</textarea>
                     </div>
-                    <div class="col-6 my-2">
-                        <label for="riesgoa">Riesgo afectado / Conducta delictiva:</label><br>
-                        <textarea style='resize: none;' name="riesgoa" class="form-control" id="riesgoa" rows="3" readonly>{{$seguimientos->RiesgoA}}</textarea>
+                    <div class="col-4 my-2">
+                        <label for="fecha">Fecha (dd/mm/aaaa)</label><br>
+                        <input class="form-control" type="date" name="fecha" value="{{$seguimiento->Fecha}}" readonly>
                     </div>
-
-                    <div class="col-6 my-2">
-                        <label for="informara">Informar a:</label><br>
-                        <input class="form-control" type="text" name="informara"  value="{{$seguimientos->InformarA}}" readonly >
+                    <div class="col-4 my-2">
+                        <label for="manejo_id">Manejo riesgo:</label><br>
+                        <input name="manejo_id" type="text" value="{{$seguimiento->Manejo->Nombre}}" class="form-control" id="manejo_id"  readonly>
                     </div>
-                    <div class="col-6 my-2">
-                        <label for="remitente">Remitente:</label><br>
-                        <input class="form-control" type="text" name="remitente"  value="{{$seguimientos->Remitente}}" readonly >
+                    <div class="col-4 my-2">
+                        <label for="calificacion_id">Calificación nivel riesgo:</label><br>
+                        <input class="form-control" type="text" name="calificacion_id" id="calificacion_id" value="{{$seguimiento->Calificacion->Nombre}}" readonly >
                     </div>
-
-                    <div class="col-3 my-2">
-                        <label for="canal">Canal:</label><br>
-                        <input class="form-control" type="text" name="remitente"  value="{{$seguimientos->Canal}}" readonly >
-
-                    </div>
-                    <div class="col-3 my-2">
-                        <label for="fechat">Fecha de tramitación:</label><br>
-                        <input class="form-control" type="date" name="fechat"  value="{{$seguimientos->FechaT}}" readonly >
-                    </div>
-                    <div class="col-3 my-2">
-                        <label for="propuesta">Propuesta:</label><br>
-                        <input class="form-control" type="text" name="propuesta"  value="{{$seguimientos->Propuesta}}" readonly >
-                    </div>
-                    <div class="col-3 my-2">
-                        <label for="nivelrp">Nivel de riesgo penal:</label><br>
-                        <input class="form-control" type="text" name="nivelrp"  value="{{$seguimientos->NivelRP}}" readonly >
-                    </div>
-                    <div class="col-6 my-2">
-                        <label for="comunicara">Comunicar a autoridades:</label><br>
-                        <textarea style='resize: none;' name="comunicara" class="form-control" id="comunicara" rows="3" readonly>{{$seguimientos->ComunicarA}}</textarea>
-
-                    </div>
-                    <div class="col-6 my-2">
-                        <label for="autoria">Autoría:</label><br>
-                        <textarea style='resize: none;' name="autoria" class="form-control" id="autoria" rows="3" readonly>{{$seguimientos->Autoria}}</textarea>
-                    </div>
-                    <div class="col-6 my-2">
-                        <label for="observaciones">Observaciones:</label><br>
-                        <textarea style='resize: none;' name="observaciones" class="form-control" id="observaciones" rows="3" readonly>{{$seguimientos->Observaciones}}</textarea>
-
-                    </div>
-                    <div class="col-6 my-2">
-                        <label for="propuestas">Propuestas:</label><br>
-                        <textarea style='resize: none;' name="propuestas" class="form-control" id="propuestas" rows="3" readonly>{{$seguimientos->Propuestas}}</textarea>
+                    <div class="col-12 my-2">
+                        <label for="Observaciones">Descripción:</label><br>
+                        <textarea style='resize: none;' name="Observaciones" class="form-control" id="Observaciones" rows="2"  readonly>{{$seguimiento->Observaciones}}</textarea>
                     </div>
                     <div class="d-flex flex-row-reverse mt-3">
-                        <a type="button" href="{{route('seguimiento.destroy', $seguimientos)}}" class="btn btn-primary btn-sm me-2"><i class="fa-solid fa-trash"></i> Delete</a>
+                        <a type="button" href="{{route('seguimiento.destroy', $seguimiento)}}" class="btn btn-primary btn-sm me-2"><i class="fa-solid fa-trash"></i> Delete</a>
                         <a type="button" href="#" class="btn btn-primary btn-sm me-2"><i class="fa-solid fa-box-archive"></i> Archivar</a>
-                        <a type="button" href="{{route('seguimiento.edit', $seguimientos)}}" class="btn btn-primary btn-sm me-2"><i class="fa-solid fa-pen-to-square"></i> Edit</a>
+                        <a type="button" href="{{route('seguimiento.edit', $seguimiento)}}" class="btn btn-primary btn-sm me-2"><i class="fa-solid fa-pen-to-square"></i> Edit</a>
                     </div>
+
                 </div>
             </div>
-            <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="actividad-tab" tabindex="0">
-                <x-cab3 texto="{{$seguimientos->Codigo}}" />
-                <x-cab4 texto="Actividades de riesgo" />
+            <div class="tab-pane fade {{$tabulador['act']}}" id="profile-tab-pane" role="tabpanel" aria-labelledby="actividad-tab" tabindex="0">
+                <div class="d-flex mb-3" style='width:100%;background-color:white'>
+                    <x-cab3 texto="Actividades de riesgo" />
+                    <a type="button" href="{{route('riesgo.create',$seguimiento)}}" class="btn btn-primary btn-sm me-2"><i class="fa-solid fa-trash"></i> Nueva actividad de riesgo</a>
+                </div>
                 <div class="px-3 mb-5">
                     <div class="container-fluid">
-                        <div class="row">
-                        @foreach ($actividadesriesgos as $actividadesriesgo)
-                            <div class="col-12 mt-3"><strong> - </strong>{{$actividadesriesgo->Nombre}}</div>
-                            <div class="col-1">Estado: @if ($actividadesriesgo->Estado == 'checked') <i class=" text-success fa-solid fa-check"></i>@endif </label><br></div>
+                        <table class='table'>
+                            <tr>
+                                <th width="5">id: </th>
+                                <th>Riesgo</th>
+                            </tr>
+                        @foreach ($seguimiento->riesgos as $riesgo)
+                            <tr>
+                                <td>{{$riesgo->id}}</td>
+                                <td><a href="{{route('riesgo.show',$riesgo)}}">{{$riesgo->Nombre}}</a></td>
+                            </tr>
                         @endforeach
-                        </div>
+                        </table>
                     </div>
                 </div>
             </div>
-            <div class="tab-pane fade" id="contact-tab-pane" role="tabpanel" aria-labelledby="control-tab" tabindex="0">
-                <x-cab3 texto="{{$seguimientos->Codigo}}" />
-                <x-cab4 texto="Controles a monitorizar" />
+            <div class="tab-pane fade {{$tabulador['acl']}}" id="actual-tab-pane" role="tabpanel" aria-labelledby="control-tab" tabindex="0">
+                <div class="d-flex mb-3" style='width:100%;background-color:white'>
+                    <x-cab3 texto="Controles actuales" />
+                    <a type="button" href="{{route('actual.create',$seguimiento)}}" class="btn btn-primary btn-sm me-2"><i class="fa-solid fa-trash"></i> Nuevo control actual</a>
+
+                </div>
                 <div class="px-3 mb-5">
                     <div class="container-fluid">
-                        <div class="row">
-                        @foreach ($controls as $control)
-                            <div class="col-12 mt-3"><strong> - </strong>{{$control->Nombre}}</div>
-                            <div class="col-1">Estado: @if ($control->Estado == 'checked') <i class=" text-success fa-solid fa-check"></i>@endif </label><br></div>
+
+                        <table class='table'>
+                            <tr>
+                                <th width="5">id: </th>
+                                <th>Control</th>
+                                <th>Responsable</th>
+                                <th width="5">Preventivo</th>
+                                <th width="5">Normativo</th>
+                                <th width="5">Correctivo</th>
+                            </tr>
+                        @foreach ($seguimiento->actuals as $actual)
+                            <tr>
+                                <td>{{$actual->id}}</td>
+                                <td><a href="{{route('actual.show',$actual)}}">{{$actual->Nombre}}</a></td>
+                                <td>{{$actual->Responsable}}</td>
+                                <td>{{$actual->Preventivo}}</td>
+                                <td>{{$actual->Normativo}}</td>
+                                <td>{{$actual->Detectivo}}</td>
+                            </tr>
                         @endforeach
-                        </div>
+                        </table>
                     </div>
                 </div>
             </div>
-            <div class="tab-pane fade" id="ficheros-tab-pane" role="tabpanel" aria-labelledby="ficheros-tab" tabindex="0">
-                <x-cab3 texto="{{$seguimientos->Codigo}}" />
+            <div class="tab-pane fade {{$tabulador['mon']}}" id="contact-tab-pane" role="tabpanel" aria-labelledby="control-tab" tabindex="0">
+                <div class="d-flex mb-3" style='width:100%;background-color:white'>
+                    <x-cab3 texto="Políticas de actuación" />
+                    <a type="button" href="{{route('control.create',$seguimiento)}}" class="btn btn-primary btn-sm me-2"><i class="fa-solid fa-trash"></i> Nuevo control actual</a>
+                </div>
+                <div class="px-3 mb-5">
+                    <div class="container-fluid">
+                        <table class='table'>
+                            <tr>
+                                <th width="5">id: </th>
+                                <th>Control</th>
+                                <th>Responsable</th>
+                                <th width="5">Preventivo</th>
+                                <th width="5">Normativo</th>
+                                <th width="5">Correctivo</th>
+                            </tr>
+                        @foreach ($seguimiento->controls as $control)
+                            <tr>
+                                <td>{{$control->id}}</td>
+                                <td><a href="{{route('control.show',$control)}}">{{$control->Nombre}}</a></td></td>
+                                <td>{{$control->Responsable}}</td>
+                                <td>{{$control->Preventivo}}</td>
+                                <td>{{$control->Normativo}}</td>
+                                <td>{{$control->Detectivo}}</td>
+                            </tr>
+                        @endforeach
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade {{$tabulador['fil']}}" id="ficheros-tab-pane" role="tabpanel" aria-labelledby="ficheros-tab" tabindex="0">
+                <x-cab3 texto="{{$seguimiento->Codigo}}" />
                 <x-cab4 texto="Ficheros" />
                 <div class="p-1">
                     <div class="col-12 my-4">
@@ -159,7 +181,7 @@
                                 <input type="text" class="form-control" value="{{$file->Nombre}}" readonly aria-describedby="button-addon2">
                                 @csrf
                                 @method('delete')
-                                <input type="hidden" name="id" value="{{$seguimientos->id}}">
+                                <input type="hidden" name="id" value="{{$seguimiento->id}}">
                                 <button class="btn btn-danger" type="submit"><i class="fa-solid fa-circle-xmark"></i></button>
                             </div>
                         </form>
@@ -169,7 +191,7 @@
                                 <div class="container">
                                     <div class="row">
                                         @csrf
-                                        <input type="hidden" name="id" value="{{$seguimientos->id}}">
+                                        <input type="hidden" name="id" value="{{$seguimiento->id}}">
                                         <div class="col-12 my-2">
                                             <input class="form-control" type="file" name="file" id="file" placeholder="Selecciona un fichero">
                                         </div>

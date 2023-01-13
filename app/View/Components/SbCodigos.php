@@ -14,7 +14,7 @@ class SbCodigos extends Component
      */
     public function __construct()
     {
-        $codigos = DB::table('codigos')->groupBy('idCodigo')->orderBy('id','asc')->limit(200)->get();
+        $codigos = DB::table('delitos')->groupBy('Epigrafe')->orderBy('id','asc')->limit(200)->get();
 
         $this->codigos = $codigos;
     }

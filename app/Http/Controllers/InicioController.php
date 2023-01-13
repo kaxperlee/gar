@@ -3,14 +3,14 @@
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
-use App\Models\Codigo;
+use App\Models\Delito;
 
 class InicioController extends Controller
 {
     public function index()
     {
-        $codigos = Codigo::all();
-        
+        $codigos = Delito::all();
+
         return view('inicio.index', ['codigos' => $codigos]);
     }
 
@@ -24,10 +24,10 @@ class InicioController extends Controller
         //$riesgo = $request->riesgo;
         $riesgo = explode ( ' ', $request->riesgo);
 
-        $codigos = Codigo::select('id','Epigrafe','Codigo','idCodigo', 'Descripcion');
+        $codigos = Delito::select('id','Epigrafe','Delito','Codigo', 'Descripcion');
 
         foreach ($riesgo as $id){
-            $codigos->where('Codigo', 'LIKE', '%'.$id.'%');
+            $codigos->where('Delito', 'LIKE', '%'.$id.'%');
         }
 
         $code = $codigos->get();
@@ -39,15 +39,15 @@ class InicioController extends Controller
 
     public function grupo($idCodigo)
     {
-        $codigos = Codigo::where('idCodigo',$idCodigo)->get();
+        $codigos = Delito::where('idCodigo',$idCodigo)->get();
         //return $codigos;
         return view('inicio.grupo', ['codigos' => $codigos, 'idCodigo' => $idCodigo]);
     }
 
     public function show($id)
     {
-        $codigos = Codigo::where('id',$id)->get();
+        $codigos = Delito::where('id',$id)->get();
         return view('inicio.show', ['codigos' => $codigos, 'id' => $id]);
     }
-    
+
 }

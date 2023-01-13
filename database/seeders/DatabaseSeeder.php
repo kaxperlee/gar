@@ -4,12 +4,11 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
-use App\Models\Actividadesriesgo;
-use App\Models\AuxCanal;
-use App\Models\AuxCaracter;
-use App\Models\Control;
+use App\Models\Calificacion;
+use App\Models\Canal;
+use App\Models\Caracter;
 use App\Models\Incidencia;
-use App\Models\Seguimiento;
+use App\Models\Manejo;
 use Illuminate\Database\Seeder;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
@@ -24,6 +23,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+
+        $this->call(ClasecontrolSeeder::class);
         $this->call(CodigoSeeder::class);
 
         $user = new User();
@@ -32,42 +33,76 @@ class DatabaseSeeder extends Seeder
         $user->password = Hash::make('password');
         $user->save();
 
-        $user = new AuxCanal();
-        $user->Canal = "Email";
-        $user->idCanal = "email";
+        $user = new Canal();
+        $user->Nombre = "Email";
+
         $user->save();
-        $user = new AuxCanal();
-        $user->Canal = "Fax";
-        $user->idCanal = "fax";
+        $user = new Canal();
+        $user->Nombre = "Fax";
+
         $user->save();
-        $user = new AuxCanal();
-        $user->Canal = "Papel";
-        $user->idCanal = "papel";
+        $user = new Canal();
+        $user->Nombre = "Papel";
+
         $user->save();
-        $user = new AuxCanal();
-        $user->Canal = "Teléfono";
-        $user->idCanal = "telefono";
+        $user = new Canal();
+        $user->Nombre = "Teléfono";
+
         $user->save();
-        $user = new AuxCanal();
-        $user->Canal = "Otro";
-        $user->idCanal = "otro";
+        $user = new Canal();
+        $user->Nombre = "Otro";
+
         $user->save();
 
-        $user = new AuxCaracter();
-        $user->Caracter = "Normal";
-        $user->idCaracter = "normal";
+        $user = new Caracter();
+        $user->Nombre = "Normal";
+
         $user->save();
 
-        $user = new AuxCaracter();
-        $user->Caracter = "Urgente";
-        $user->idCaracter = "urgente";
+        $user = new Caracter();
+        $user->Nombre = "Urgente";
+
         $user->save();
 
-        Incidencia::factory(24)->create();
-        Seguimiento::factory(19)->create();
-        Actividadesriesgo::factory(120)->create();
-        Control::factory(120)->create();
+        $manejo = new Manejo();
+        $manejo->Nombre = 'Evitar riesgo';
+        $manejo->save();
 
+        $manejo = new Manejo();
+        $manejo->Nombre = 'Reducir riesgo' ;
+        $manejo->save();
+
+        $manejo = new Manejo();
+        $manejo->Nombre = 'Asumir riesgo';
+        $manejo->save();
+
+        $calificacion = new Calificacion();
+        $calificacion->Nombre = 'Muy alto';
+        $calificacion->save();
+
+        $calificacion = new Calificacion();
+        $calificacion->Nombre = 'Alto';
+        $calificacion->save();
+
+        $calificacion = new Calificacion();
+        $calificacion->Nombre = 'Medio';
+        $calificacion->save();
+
+        $calificacion = new Calificacion();
+        $calificacion->Nombre = 'Bajo';
+        $calificacion->save();
+
+        //$this->call(RiesgoSeeder::class);
+        //
+        $this->call(SeguimientoSeeder::class);
+        $this->call(ActualSeeder::class);
+        $this->call(RiesgoSeeder::class);
+        $this->call(ControlSeeder::class);
+
+        Incidencia::factory(10)->create();
+        //Seguimiento::factory(19)->create();
+        //Riesgo::factory(120)->create();
+        //Control::factory(120)->create();
 
     }
 }
