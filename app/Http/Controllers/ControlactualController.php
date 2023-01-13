@@ -53,4 +53,18 @@ class ControlactualController extends Controller
         return view('actual.edit', compact('actual'));
 
     }
+    public function update(Request $request, Actual $control){
+
+        $actual = Actual::find($request->id);
+        //$incidencia->update($request->all());
+        $actual->update(['Nombre' => $request->Nombre]);
+        return redirect()->route('actual.show',$request->id);
+    }
+
+    public function destroy($id){
+        $actual = Actual::find($id);
+
+       $deleted = Actual::where('id',$actual->id)->delete();
+        return redirect()->route('seguimiento.show',[$actual->seguimiento_id,'act']);
+    }
 }

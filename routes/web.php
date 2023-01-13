@@ -80,6 +80,7 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/actual/{id}/{tab?}', [Con
 Route::middleware(['auth:sanctum', 'verified'])->get('/control/edit/{id}', [ControlController::class, 'edit'])->name('control.edit');
 Route::middleware(['auth:sanctum', 'verified'])->get('/control/delete/{id}', [ControlController::class, 'destroy'])->name('control.destroy');
 Route::middleware(['auth:sanctum', 'verified'])->get('/control/create/{id}', [ControlController::class, 'create'])->name('control.create');
+Route::middleware(['auth:sanctum', 'verified'])->put('/control/update/{id}', [ControlController::class, 'update'])->name('control.update');
 Route::middleware(['auth:sanctum', 'verified'])->post('/control', [ControlController::class, 'store'])->name('control.store');
 Route::middleware(['auth:sanctum', 'verified'])->get('/control/{id}/{tab?}', [ControlController::class, 'show'])->name('control.show');
 

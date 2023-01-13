@@ -57,4 +57,19 @@ class ControlController extends Controller
         return view('control.edit', compact('control'));
 
     }
+
+    public function update(Request $request, Control $control){
+
+        $control = Control::find($request->id);
+        //$incidencia->update($request->all());
+        $control->update(['Nombre' => $request->Nombre]);
+        return redirect()->route('control.show',$request->id);
+    }
+
+    public function destroy($id){
+        $control = Control::find($id);
+
+       $deleted = Control::where('id',$control->id)->delete();
+        return redirect()->route('seguimiento.show',[$control->seguimiento_id,'act']);
+    }
 }

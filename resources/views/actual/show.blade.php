@@ -14,9 +14,9 @@
 
 <div class="d-flex  mb-3">
     <a type="button" href="{{route('seguimiento.show', [$actual->seguimiento_id,'acl'])}}" class="me-auto btn btn-primary btn-sm me-2"><i class="fa-solid fa-circle-chevron-left"></i> Volver</a>
-    <a type="button" href="{{route('riesgo.destroy', $actual)}}" class="btn btn-primary btn-sm me-2"><i class="fa-solid fa-trash"></i> Delete</a>
+    <a type="button" href="{{route('actual.destroy', $actual)}}" class="btn btn-primary btn-sm me-2"><i class="fa-solid fa-trash"></i> Delete</a>
     <a type="button" href="#" class="btn btn-primary btn-sm me-2"><i class="fa-solid fa-box-archive"></i> Archivar</a>
-    <a type="button" href="{{route('riesgo.edit', $actual)}}" class="btn btn-primary btn-sm me-2"><i class="fa-solid fa-pen-to-square"></i> Edit</a>
+    <a type="button" href="{{route('actual.edit', $actual)}}" class="btn btn-primary btn-sm me-2"><i class="fa-solid fa-pen-to-square"></i> Edit</a>
 </div>
 
 <div class="px-3">
