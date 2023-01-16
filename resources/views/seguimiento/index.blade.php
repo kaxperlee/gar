@@ -16,6 +16,7 @@
         <th>Delito:</th>
         <th>Manejo riesgo:</th>
         <th>Calificación nivel riesgo: </th>
+        <th colspan="2"></th>
 
     </tr>
 @foreach ($seguimientos as $seguimiento)
@@ -26,9 +27,12 @@
         <td><a href="{{route('seguimiento.show',$seguimiento)}}">{{ $seguimiento->Delito->Delito }}</a></td>
         <td>{{ $seguimiento->Manejo->Nombre }}</td>
         <td>{{ $seguimiento->Calificacion->Nombre }}</td>
-
+        <td><a href="{{route('seguimiento.edit', $seguimiento->id)}}" class="color-prymary" role="button" aria-disabled="true"><i class="fa-regular fa-pen-to-square"></i></a></td>
+        <td><a href="{{route('seguimiento.delete', $seguimiento->id)}}" class="color-prymary" role="button" aria-disabled="true"><i class="fa-solid fa-trash"></i></a></td>
     </tr>
 @endforeach
 </table>
+
+
 @endsection
 

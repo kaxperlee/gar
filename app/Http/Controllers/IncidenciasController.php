@@ -122,9 +122,18 @@ class IncidenciasController extends Controller
         'Autoria' => $request->Autoria, 'Observaciones' => $request->Observaciones, 'Propuestas' => $request->Propuestas]);
         return redirect()->route('incidencias.show',$request->id);
     }
-    public function destroy($id) {
+    public function destroy($id){
+        $incidencias = Incidencia::find($id);
 
-        return "<h1>Delete: ".$id."</h1>";
+       $deleted = Incidencia::where('id',$incidencias->id)->delete();
+        return redirect()->route('incidencias.index',$incidencias->incidencia_id);
+    }
+
+    public function delete($id){
+        
+        $incidencia = Incidencia::find($id);
+        
+        return view('incidencias.delete', compact('incidencia'));
     }
 
     public function storeinforme(Request $request){

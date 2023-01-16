@@ -55,13 +55,15 @@ Route::middleware(['auth:sanctum', 'verified'])->post('/incidencias/fileform', [
 Route::middleware(['auth:sanctum', 'verified'])->get('/incidencias/{id}', [IncidenciasController::class, 'show'])->name('incidencias.show');
 Route::middleware(['auth:sanctum', 'verified'])->get('/incidencias/edit/{id}', [IncidenciasController::class, 'edit'])->name('incidencias.edit');
 Route::middleware(['auth:sanctum', 'verified'])->put('/incidencias/update', [IncidenciasController::class, 'update'])->name('incidencias.update');
-Route::middleware(['auth:sanctum', 'verified'])->get('/incidencias/delete/{id}', [IncidenciasController::class, 'destroy'])->name('incidencias.destroy');
+Route::middleware(['auth:sanctum', 'verified'])->get('/incidencias/delete/{id}', [IncidenciasController::class, 'delete'])->name('incidencias.delete');
+Route::middleware(['auth:sanctum', 'verified'])->get('/incidencias/destroy/{id}', [IncidenciasController::class, 'destroy'])->name('incidencias.destroy');
 Route::middleware(['auth:sanctum', 'verified'])->post('/incidencias/pdf', [IncidenciasController::class, 'storeinforme'])->name('incidencias.storeinforme');
 
 //Route::middleware(['auth:sanctum', 'verified'])->get('/seguimiento/{id}/{tab}', [SeguimientoController::class, 'show2'])->name('seguimiento.show2');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/seguimiento/edit/{id}', [SeguimientoController::class, 'edit'])->name('seguimiento.edit');
-Route::middleware(['auth:sanctum', 'verified'])->get('/seguimiento/delete/{id}', [SeguimientoController::class, 'destroy'])->name('seguimiento.destroy');
+Route::middleware(['auth:sanctum', 'verified'])->get('/seguimiento/delete/{id}', [SeguimientoController::class, 'delete'])->name('seguimiento.delete');
+Route::middleware(['auth:sanctum', 'verified'])->get('/seguimiento/destroy/{id}', [SeguimientoController::class, 'destroy'])->name('seguimiento.destroy');
 Route::middleware(['auth:sanctum', 'verified'])->get('/seguimiento', [SeguimientoController::class, 'index'])->name('seguimiento.index');
 Route::middleware(['auth:sanctum', 'verified'])->post('/seguimiento/search', [SeguimientoController::class, 'search'])->name('seguimiento.search');
 Route::middleware(['auth:sanctum', 'verified'])->post('/seguimiento', [SeguimientoController::class, 'store'])->name('seguimiento.store');
@@ -71,21 +73,24 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/seguimiento/select/{id}',
 Route::middleware(['auth:sanctum', 'verified'])->get('/seguimiento/{id}/{tab?}', [SeguimientoController::class, 'show'])->name('seguimiento.show');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/actual/edit/{id}', [ControlactualController::class, 'edit'])->name('actual.edit');
-Route::middleware(['auth:sanctum', 'verified'])->get('/actual/delete/{id}', [ControlactualController::class, 'destroy'])->name('actual.destroy');
+Route::middleware(['auth:sanctum', 'verified'])->get('/actual/delete/{id}', [ControlactualController::class, 'delete'])->name('actual.delete');
+Route::middleware(['auth:sanctum', 'verified'])->get('/actual/destroy/{id}', [ControlactualController::class, 'destroy'])->name('actual.destroy');
 Route::middleware(['auth:sanctum', 'verified'])->get('/actual/create/{id}', [ControlactualController::class, 'create'])->name('actual.create');
 Route::middleware(['auth:sanctum', 'verified'])->put('/actual/update/{id}', [ControlactualController::class, 'update'])->name('actual.update');
 Route::middleware(['auth:sanctum', 'verified'])->post('/actual', [ControlactualController::class, 'store'])->name('actual.store');
 Route::middleware(['auth:sanctum', 'verified'])->get('/actual/{id}/{tab?}', [ControlactualController::class, 'show'])->name('actual.show');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/control/edit/{id}', [ControlController::class, 'edit'])->name('control.edit');
-Route::middleware(['auth:sanctum', 'verified'])->get('/control/delete/{id}', [ControlController::class, 'destroy'])->name('control.destroy');
+Route::middleware(['auth:sanctum', 'verified'])->get('/control/delete/{id}', [ControlController::class, 'delete'])->name('control.delete');
+Route::middleware(['auth:sanctum', 'verified'])->get('/control/destroy/{id}', [ControlController::class, 'destroy'])->name('control.destroy');
 Route::middleware(['auth:sanctum', 'verified'])->get('/control/create/{id}', [ControlController::class, 'create'])->name('control.create');
 Route::middleware(['auth:sanctum', 'verified'])->put('/control/update/{id}', [ControlController::class, 'update'])->name('control.update');
 Route::middleware(['auth:sanctum', 'verified'])->post('/control', [ControlController::class, 'store'])->name('control.store');
 Route::middleware(['auth:sanctum', 'verified'])->get('/control/{id}/{tab?}', [ControlController::class, 'show'])->name('control.show');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/riesgo/edit/{id}', [RiesgoController::class, 'edit'])->name('riesgo.edit');
-Route::middleware(['auth:sanctum', 'verified'])->get('/riesgo/delete/{id}', [RiesgoController::class, 'destroy'])->name('riesgo.destroy');
+Route::middleware(['auth:sanctum', 'verified'])->get('/riesgo/delete/{id}', [RiesgoController::class, 'delete'])->name('riesgo.delete');
+Route::middleware(['auth:sanctum', 'verified'])->get('/riesgo/destroy/{id}', [RiesgoController::class, 'destroy'])->name('riesgo.destroy');
 Route::middleware(['auth:sanctum', 'verified'])->get('/riesgo/create/{id}', [RiesgoController::class, 'create'])->name('riesgo.create');
 Route::middleware(['auth:sanctum', 'verified'])->put('/riesgo/update/{id}', [RiesgoController::class, 'update'])->name('riesgo.update');
 Route::middleware(['auth:sanctum', 'verified'])->post('/riesgo', [RiesgoController::class, 'store'])->name('riesgo.store');

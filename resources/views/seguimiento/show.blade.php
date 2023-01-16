@@ -34,7 +34,7 @@
             <div class="tab-pane fade {{$tabulador['exp']}}" id="home-tab-pane" role="tabpanel" aria-labelledby="exp-tab" tabindex="0">
                 <div class="d-flex mb-3" style='width:100%;background-color:white'>
                     <x-cab3 texto="Delito" />
-                    <a type="button" href="{{route('seguimiento.index')}}" class="btn btn-primary btn-sm me-2"><i class="fa-solid fa-trash"></i> Delete</a>
+                    <a type="button" href="{{route('seguimiento.delete',$seguimiento)}}" class="btn btn-primary btn-sm me-2"><i class="fa-solid fa-trash"></i> Delete</a>
                     <a type="button" href="#" class="btn btn-primary btn-sm me-2"><i class="fa-solid fa-box-archive"></i> Archivar</a>
                     <a type="button" href="{{route('seguimiento.index')}}" class="btn btn-primary btn-sm me-2"><i class="fa-solid fa-pen-to-square"></i> Edit</a>
                 </div>
@@ -90,15 +90,18 @@
                 </div>
                 <div class="px-3 mb-5">
                     <div class="container-fluid">
-                        <table class='table'>
+                        <table class='table table-hover'>
                             <tr>
                                 <th width="5">id: </th>
                                 <th>Riesgo</th>
+                                <th colspan="2"></th>
                             </tr>
                         @foreach ($seguimiento->riesgos as $riesgo)
                             <tr>
                                 <td>{{$riesgo->id}}</td>
                                 <td><a href="{{route('riesgo.show',$riesgo)}}">{{$riesgo->Nombre}}</a></td>
+                                <td><a href="{{route('riesgo.edit', $riesgo->id)}}" class="color-prymary" role="button" aria-disabled="true"><i class="fa-regular fa-pen-to-square"></i></a></td>
+                                <td><a href="{{route('riesgo.delete', $riesgo->id)}}" class="color-prymary" role="button" aria-disabled="true"><i class="fa-solid fa-trash"></i></a></td>
                             </tr>
                         @endforeach
                         </table>
@@ -114,7 +117,7 @@
                 <div class="px-3 mb-5">
                     <div class="container-fluid">
 
-                        <table class='table'>
+                        <table class='table table-hover'>
                             <tr>
                                 <th width="5">id: </th>
                                 <th>Control</th>
@@ -122,6 +125,7 @@
                                 <th width="5">Preventivo</th>
                                 <th width="5">Normativo</th>
                                 <th width="5">Correctivo</th>
+                                <th colspan="2"></th>
                             </tr>
                         @foreach ($seguimiento->actuals as $actual)
                             <tr>
@@ -131,6 +135,8 @@
                                 <td>{{$actual->Preventivo}}</td>
                                 <td>{{$actual->Normativo}}</td>
                                 <td>{{$actual->Detectivo}}</td>
+                                <td><a href="{{route('actual.edit', $actual->id)}}" class="color-prymary" role="button" aria-disabled="true"><i class="fa-regular fa-pen-to-square"></i></a></td>
+                                <td><a href="{{route('actual.delete', $actual->id)}}" class="color-prymary" role="button" aria-disabled="true"><i class="fa-solid fa-trash"></i></a></td>
                             </tr>
                         @endforeach
                         </table>
@@ -144,7 +150,7 @@
                 </div>
                 <div class="px-3 mb-5">
                     <div class="container-fluid">
-                        <table class='table'>
+                        <table class='table table-hover'>
                             <tr>
                                 <th width="5">id: </th>
                                 <th>Control</th>
@@ -152,6 +158,7 @@
                                 <th width="5">Preventivo</th>
                                 <th width="5">Normativo</th>
                                 <th width="5">Correctivo</th>
+                                <th colspan="2"></th>
                             </tr>
                         @foreach ($seguimiento->controls as $control)
                             <tr>
@@ -161,6 +168,8 @@
                                 <td>{{$control->Preventivo}}</td>
                                 <td>{{$control->Normativo}}</td>
                                 <td>{{$control->Detectivo}}</td>
+                                <td><a href="{{route('control.edit', $control->id)}}" class="color-prymary" role="button" aria-disabled="true"><i class="fa-regular fa-pen-to-square"></i></a></td>
+                                <td><a href="{{route('control.delete', $actual->id)}}" class="color-prymary" role="button" aria-disabled="true"><i class="fa-solid fa-trash"></i></a></td>
                             </tr>
                         @endforeach
                         </table>

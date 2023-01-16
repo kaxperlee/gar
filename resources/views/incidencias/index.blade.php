@@ -25,7 +25,7 @@
         <td><a href="{{route('incidencias.show',$codigo)}}">{{ $codigo->Descripcion }}</a></td>
         <td>{{ $codigo->Remitente }}</td>
         <td><a href="{{route('incidencias.edit', $codigo->id)}}" class="color-prymary" role="button" aria-disabled="true"><i class="fa-regular fa-pen-to-square"></i></a></td>
-        <td><a href="{{route('incidencias.destroy', $codigo->id)}}" class="color-prymary" role="button" aria-disabled="true"><i class="fa-solid fa-trash"></i></a></td>
+        <td><a href="{{route('incidencias.delete', $codigo->id)}}" class="color-prymary" role="button" aria-disabled="true"><i class="fa-solid fa-trash"></i></a></td>
     </tr>
 @endforeach
 </table>

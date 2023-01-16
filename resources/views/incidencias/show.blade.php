@@ -12,7 +12,7 @@
 <x-cab2 texto="Clientes recientes" />
 
 <div class="d-flex flex-row-reverse mb-3">
-    <a type="button" href="{{route('incidencias.destroy', $incidencia)}}" class="btn btn-primary btn-sm me-2"><i class="fa-solid fa-trash"></i> Delete</a>
+    <a type="button" href="{{route('incidencias.delete', $incidencia)}}" class="btn btn-primary btn-sm me-2"><i class="fa-solid fa-trash"></i> Delete</a>
     <a type="button" href="#" class="btn btn-primary btn-sm me-2"><i class="fa-solid fa-box-archive"></i> Archivar</a>
     <a type="button" href="{{route('incidencias.edit', $incidencia)}}" class="btn btn-primary btn-sm me-2"><i class="fa-solid fa-pen-to-square"></i> Edit</a>
 </div>

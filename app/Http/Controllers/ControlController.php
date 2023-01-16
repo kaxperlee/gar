@@ -70,6 +70,6 @@ class ControlController extends Controller
         $control = Control::find($id);
 
        $deleted = Control::where('id',$control->id)->delete();
-        return redirect()->route('seguimiento.show',[$control->seguimiento_id,'act']);
+        return redirect()->route('seguimiento.show',[$control->seguimiento_id,'mon']);
     }
 }

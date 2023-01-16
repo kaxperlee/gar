@@ -42,7 +42,7 @@ class ControlactualController extends Controller
         $actual->seguimiento_id = $request->seguimiento_id;
         echo "<h2> Check: ".$request->Preventivo."</h2>";
         $actual->save();
-        return redirect()->route('seguimiento.show', $request->seguimiento_id);
+        return redirect()->route('seguimiento.show', [$request->seguimiento_id,'acl']);
         //return $incidencia;
     }
 
@@ -65,6 +65,6 @@ class ControlactualController extends Controller
         $actual = Actual::find($id);
 
        $deleted = Actual::where('id',$actual->id)->delete();
-        return redirect()->route('seguimiento.show',[$actual->seguimiento_id,'act']);
+        return redirect()->route('seguimiento.show',[$actual->seguimiento_id,'acl']);
     }
 }

@@ -97,4 +97,18 @@ class SeguimientoController extends Controller
         'Observaciones' =>  $request->Observaciones]);
         return redirect()->route('seguimiento.show',$request->id);
     }
+
+    public function destroy($id){
+        $seguimiento = Seguimiento::find($id);
+
+       $deleted = Seguimiento::where('id',$seguimiento->id)->delete();
+        return redirect()->route('seguimiento.index',$seguimiento->seguimiento_id);
+    }
+
+    public function delete($id){
+        
+        $seguimiento = Seguimiento::find($id);
+        
+        return view('seguimiento.delete', compact('seguimiento'));
+    }
 }
