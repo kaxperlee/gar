@@ -46,12 +46,13 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/codigos/{id}', [InicioCon
 
 Route::middleware(['auth:sanctum', 'verified'])->delete('/files/destroy/{id}', [ FilesController::class, 'destroy'])->name('files.destroy');
 Route::middleware(['auth:sanctum', 'verified'])->get('/files/download/{id}', [ FilesController::class, 'download'])->name('files.download');
+Route::middleware(['auth:sanctum', 'verified'])->post('/files/fileform', [FilesController::class, 'fileform'])->name('files.fileform');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/incidencias', [IncidenciasController::class, 'index'])->name('incidencias.index');
 Route::middleware(['auth:sanctum', 'verified'])->get('/incidencias/create/{id}', [IncidenciasController::class, 'create'])->name('incidencias.create');
 Route::middleware(['auth:sanctum', 'verified'])->post('/incidencias', [IncidenciasController::class, 'store'])->name('incidencias.store');
 Route::middleware(['auth:sanctum', 'verified'])->post('/incidencias/search', [IncidenciasController::class, 'search'])->name('incidencias.search');
-Route::middleware(['auth:sanctum', 'verified'])->post('/incidencias/fileform', [IncidenciasController::class, 'fileform'])->name('incidencias.fileform');
+//Route::middleware(['auth:sanctum', 'verified'])->post('/incidencias/fileform', [IncidenciasController::class, 'fileform'])->name('incidencias.fileform');
 Route::middleware(['auth:sanctum', 'verified'])->get('/incidencias/{id}', [IncidenciasController::class, 'show'])->name('incidencias.show');
 Route::middleware(['auth:sanctum', 'verified'])->get('/incidencias/edit/{id}', [IncidenciasController::class, 'edit'])->name('incidencias.edit');
 Route::middleware(['auth:sanctum', 'verified'])->put('/incidencias/update', [IncidenciasController::class, 'update'])->name('incidencias.update');

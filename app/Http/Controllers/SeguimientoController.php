@@ -35,10 +35,10 @@ class SeguimientoController extends Controller
 
         $actividadesriesgos = ""; //Actividadesriesgo::where('id_Seguimiento',$seguimientos->id)->get();
         $controls = ""; //Control::where('id_Seguimiento',$seguimientos->id)->get();
-        $files = File::where('id_Codigo',$id)->where('Tipo','seguimiento')->get();
+
         //$files =  File::where('id_Codigo',$incidencias->id)->get();
 
-        return view('seguimiento.show', compact('seguimiento','actividadesriesgos','controls','files','tabulador'));
+        return view('seguimiento.show', compact('seguimiento','actividadesriesgos','controls','tabulador'));
     }
 
     public function search(Request $request){
@@ -106,9 +106,9 @@ class SeguimientoController extends Controller
     }
 
     public function delete($id){
-        
+
         $seguimiento = Seguimiento::find($id);
-        
+
         return view('seguimiento.delete', compact('seguimiento'));
     }
 }

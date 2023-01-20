@@ -24,7 +24,30 @@ class FilesController extends Controller
         $ruta = str_replace("storage", "public", $file->Ruta);
         //return $ruta;
         //return Storage::url($ruta);
-        return Storage::download($ruta);
+        return Storage::download($ruta,$file->Nombre);
 
+    }
+
+    public function fileform(Request $request)
+    {
+        $id = $request->id;
+        $name = $request->file('file')->getClientOriginalName();
+        $path = $request->file('file')->store('public/files/'.$id);
+
+        $array = explode('public',$path);
+
+        //return $request;
+
+        $save = new File();
+        $save->Nombre = $name;
+        $save->Descripcion = $request->Descripcion;
+        $save->fileable_id = $request->id;
+        $save->fileable_type = $request->fileable_type;
+        $save->Ruta = 'storage'.$array[1];
+
+        $save->save();
+
+        return redirect()->route($request->link.'.show',$id);
+        //return $incidencia;
     }
 }

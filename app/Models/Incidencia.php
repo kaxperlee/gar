@@ -26,4 +26,8 @@ class Incidencia extends Model
 
         return $this->belongsTo(Caracter::class);
     }
+    //Relación uno a muchos polimórfica
+    public function files(){
+        return $this->morphMany(File::class,'fileable');
+    }
 }

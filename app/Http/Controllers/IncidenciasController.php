@@ -80,9 +80,13 @@ class IncidenciasController extends Controller
 
         $array = explode('public',$path);
 
+        //return $request;
+
         $save = new File();
         $save->Nombre = $name;
-        $save->id_Codigo = $request->id;
+        $save->Descripcion = $request->Descripcion;
+        $save->fileable_id = $request->id;
+        $save->fileable_type = 'App\Models\Incidencia';
         $save->Ruta = 'storage'.$array[1];
 
         $save->save();
@@ -92,13 +96,18 @@ class IncidenciasController extends Controller
     }
 
 
-    public function show($id)
+    public function show($id,$tab='inc')
     {
+        $tabulador['inc'] = '';
+        $tabulador['fic'] = '';
+        $tabulador['inf'] = '';
+        $tabulador[$tab] = 'show active';
+
         $incidencia = Incidencia::find($id);
-        $files =  File::where('id_Codigo',$incidencia->id)->get();
+
         $informes = Informe::where('id_incidencia',$id)->get();
 
-        return view('incidencias.show', compact('incidencia','files','informes'));
+        return view('incidencias.show', compact('incidencia','informes','tabulador'));
     }
 
     public function edit($id) {
@@ -106,9 +115,9 @@ class IncidenciasController extends Controller
         $caracter = Caracter::pluck('Nombre','id');
         $canal = Canal::pluck('Nombre','id');
         $incidencia = Incidencia::find($id);
-        $files =  File::where('id_Codigo',$incidencia->id)->get();
 
-        return view('incidencias.edit', compact('incidencia','files','caracter','canal'));
+
+        return view('incidencias.edit', compact('incidencia','caracter','canal'));
        // return "<h1>Edit: ".$id."</h1>";
     }
 
@@ -130,9 +139,9 @@ class IncidenciasController extends Controller
     }
 
     public function delete($id){
-        
+
         $incidencia = Incidencia::find($id);
-        
+
         return view('incidencias.delete', compact('incidencia'));
     }
 

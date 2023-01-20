@@ -158,7 +158,7 @@
                                 <th width="5">Preventivo</th>
                                 <th width="5">Normativo</th>
                                 <th width="5">Correctivo</th>
-                                <th colspan="2"></th>
+                                <th  width="20" colspan="2"></th>
                             </tr>
                         @foreach ($seguimiento->controls as $control)
                             <tr>
@@ -177,30 +177,40 @@
                 </div>
             </div>
             <div class="tab-pane fade {{$tabulador['fil']}}" id="ficheros-tab-pane" role="tabpanel" aria-labelledby="ficheros-tab" tabindex="0">
-                <x-cab3 texto="{{$seguimiento->Codigo}}" />
-                <x-cab4 texto="Ficheros" />
-                <div class="p-1">
-                    <div class="col-12 my-4">
+                <div class="d-flex mb-3" style='width:100%;background-color:white'>
+                    <x-cab3 texto="Políticas de actuación" />
+                </div>
+                <div class="px-3 mb-5">
+                    <div class="container-fluid">
+                        <table class='table table-hover'>
+                            <tr>
+                                <th width="10">Fichero</th>
+                                <th>Descripción</th>
+                                <th width="10"></th>
+                                <th width="10"></th>
+                            </tr>
+                            @foreach ($seguimiento->files as $file)
+                            <tr>
+                                <td><a href="{{route('files.download',['id' => $file->id])}}">{{$file->Nombre}}</a></td>
+                                <td>{{$file->Descripcion}}</td>
+                                <td><a href="{{route('files.download',['id' => $file->id])}}" class="color-prymary" role="button" aria-disabled="true"><i class="fa-solid fa-file-arrow-down"></i></a></td>
+                                <td><a href="{{route('control.delete', $file->id)}}" class="color-prymary" role="button" aria-disabled="true"><i class="fa-solid fa-trash"></i></a></td>
+                            </tr>
+                            @endforeach
+                        </table>
                         <div class="h-100 p-5 bg-light border rounded-3">
-                        <h5 class="">Ficheros</h5>
-                        @foreach ($files as $file)
-                        <form method="POST" action="{{route('files.destroy',$file)}}">
-                            <div class="input-group mb-3">
-                                <a href="{{route('files.download',['id' => $file->id])}}" class="btn btn-primary">Ver {{$file->id}}</a>
-                                <input type="text" class="form-control" value="{{$file->Nombre}}" readonly aria-describedby="button-addon2">
-                                @csrf
-                                @method('delete')
-                                <input type="hidden" name="id" value="{{$seguimiento->id}}">
-                                <button class="btn btn-danger" type="submit"><i class="fa-solid fa-circle-xmark"></i></button>
-                            </div>
-                        </form>
-                        @endforeach
                             <h5 class="mt-5">Añadir fichero</h5>
-                            <form method="POST" enctype="multipart/form-data" id="upload-file" action="{{route('incidencias.fileform')}}">
+                            <form method="POST" enctype="multipart/form-data" id="upload-file" action="{{route('files.fileform')}}">
                                 <div class="container">
                                     <div class="row">
                                         @csrf
                                         <input type="hidden" name="id" value="{{$seguimiento->id}}">
+                                        <input type="hidden" name="fileable_type" value="App\Models\Seguimiento">
+                                        <input type="hidden" name="link" value="seguimiento">
+                                        <div class="col-12 my-2">
+                                            <label for="Descripcion" class="form-label">Descripción:</label>
+                                            <input class="form-control" type="text" name="Descripcion" id="Descripcion" placeholder="">
+                                        </div>
                                         <div class="col-12 my-2">
                                             <input class="form-control" type="file" name="file" id="file" placeholder="Selecciona un fichero">
                                         </div>

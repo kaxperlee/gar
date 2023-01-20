@@ -38,4 +38,9 @@ class Seguimiento extends Model
         return $this->belongsTo(Calificacion::class);
    }
 
+   //Relación uno a muchos polimórfica
+   public function files(){
+    return $this->morphMany(File::class,'fileable');
+}
+
 }
