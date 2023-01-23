@@ -18,6 +18,16 @@ class FilesController extends Controller
         return redirect()->route('incidencias.show',$incidencias);
 
     }
+
+    public function delete($file)
+    {
+        return $file;
+        $file = File::find($file);
+        //$incidencias = Incidencia::find($request->id);
+        return $file;
+        return redirect()->route('incidencias.index');
+
+    }
     public function download($file){
 
         $file = File::find($file);
@@ -44,10 +54,10 @@ class FilesController extends Controller
         $save->fileable_id = $request->id;
         $save->fileable_type = $request->fileable_type;
         $save->Ruta = 'storage'.$array[1];
-
+       // return $request->link;
         $save->save();
 
-        return redirect()->route($request->link.'.show',$id);
+        return redirect()->route($request->link.'.show',[$id,'fil']);
         //return $incidencia;
     }
 }

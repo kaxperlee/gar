@@ -45,6 +45,7 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/grupo/{idCodigo}', [Inici
 Route::middleware(['auth:sanctum', 'verified'])->get('/codigos/{id}', [InicioController::class, 'show'])->name('codigos.show');
 
 Route::middleware(['auth:sanctum', 'verified'])->delete('/files/destroy/{id}', [ FilesController::class, 'destroy'])->name('files.destroy');
+Route::middleware(['auth:sanctum', 'verified'])->get('/files/delete/{id}', [ FilesController::class, 'delete'])->name('files.delete');
 Route::middleware(['auth:sanctum', 'verified'])->get('/files/download/{id}', [ FilesController::class, 'download'])->name('files.download');
 Route::middleware(['auth:sanctum', 'verified'])->post('/files/fileform', [FilesController::class, 'fileform'])->name('files.fileform');
 
@@ -53,7 +54,7 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/incidencias/create/{id}',
 Route::middleware(['auth:sanctum', 'verified'])->post('/incidencias', [IncidenciasController::class, 'store'])->name('incidencias.store');
 Route::middleware(['auth:sanctum', 'verified'])->post('/incidencias/search', [IncidenciasController::class, 'search'])->name('incidencias.search');
 //Route::middleware(['auth:sanctum', 'verified'])->post('/incidencias/fileform', [IncidenciasController::class, 'fileform'])->name('incidencias.fileform');
-Route::middleware(['auth:sanctum', 'verified'])->get('/incidencias/{id}', [IncidenciasController::class, 'show'])->name('incidencias.show');
+Route::middleware(['auth:sanctum', 'verified'])->get('/incidencias/{id}/{tab?}', [IncidenciasController::class, 'show'])->name('incidencias.show');
 Route::middleware(['auth:sanctum', 'verified'])->get('/incidencias/edit/{id}', [IncidenciasController::class, 'edit'])->name('incidencias.edit');
 Route::middleware(['auth:sanctum', 'verified'])->put('/incidencias/update', [IncidenciasController::class, 'update'])->name('incidencias.update');
 Route::middleware(['auth:sanctum', 'verified'])->get('/incidencias/delete/{id}', [IncidenciasController::class, 'delete'])->name('incidencias.delete');

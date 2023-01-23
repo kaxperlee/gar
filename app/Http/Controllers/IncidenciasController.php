@@ -99,7 +99,7 @@ class IncidenciasController extends Controller
     public function show($id,$tab='inc')
     {
         $tabulador['inc'] = '';
-        $tabulador['fic'] = '';
+        $tabulador['fil'] = '';
         $tabulador['inf'] = '';
         $tabulador[$tab] = 'show active';
 

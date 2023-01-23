@@ -16,14 +16,14 @@
         <button class="nav-link {{$tabulador['inc']}}" id="incidencia-tab" data-bs-toggle="tab" data-bs-target="#incidencia-tab-pane" type="button" role="tab" aria-controls="incidencia-tab-pane" aria-selected="true">Datos</button>
     </li>
     <li class="nav-item" role="presentation">
-        <button class="nav-link {{$tabulador['fic']}}" id="ficheros-tab" data-bs-toggle="tab" data-bs-target="#ficheros-tab-pane" type="button" role="tab" aria-controls="ficheros-tab-pane" aria-selected="false">Ficheros</button>
+        <button class="nav-link {{$tabulador['fil']}}" id="ficheros-tab" data-bs-toggle="tab" data-bs-target="#ficheros-tab-pane" type="button" role="tab" aria-controls="ficheros-tab-pane" aria-selected="false">Ficheros</button>
     </li>
     <li class="nav-item" role="presentation">
         <button class="nav-link {{$tabulador['inf']}}" id="informes-tab" data-bs-toggle="tab" data-bs-target="#informes-tab-pane" type="button" role="tab" aria-controls="informes-tab-pane" aria-selected="false">Informes</button>
     </li>
     <li class="nav-item ms-auto" role="presentation">
         <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" >
+            <input class="form-check-input" type="checkbox" role="switch" checked id="flexSwitchCheckDefault" onclick="return false;" >
             <label class="form-check-label" for="flexSwitchCheckDefault" >Activo</label>
           </div>
     </li>
@@ -34,8 +34,8 @@
             <div class="tab-pane fade {{$tabulador['inc']}}" id="incidencia-tab-pane" role="tabpanel" aria-labelledby="incidencia-tab" tabindex="0">
                 <div class="d-flex mb-3" style='width:100%;background-color:white'>
                     <x-cab3 texto="Datos" />
-                    <a type="button" href="{{route('incidencias.delete',$incidencia)}}" class="btn btn-primary btn-sm me-2"><i class="fa-solid fa-trash"></i> Delete</a>
                     <a type="button" href="{{route('incidencias.edit', $incidencia)}}" class="btn btn-primary btn-sm me-2"><i class="fa-solid fa-pen-to-square"></i> Edit</a>
+                    <a type="button" href="{{route('incidencias.delete',$incidencia)}}" class="btn btn-primary btn-sm me-2"><i class="fa-solid fa-trash"></i> Delete</a>
                 </div>
                 <div class="row px-3">
                     <div class="col-2 my-2">
@@ -109,13 +109,12 @@
                         <textarea style='resize: none;' name="propuestas" class="form-control" id="propuestas" rows="3" readonly>{{$incidencia->Propuestas}}</textarea>
                     </div>
                     <div class="d-flex flex-row-reverse mt-3">
-                        <a type="button" href="{{route('incidencias.destroy', $incidencia)}}" class="btn btn-primary btn-sm me-2"><i class="fa-solid fa-trash"></i> Delete</a>
-                        <a type="button" href="#" class="btn btn-primary btn-sm me-2"><i class="fa-solid fa-box-archive"></i> Archivar</a>
+                        <a type="button" href="{{route('incidencias.delete', $incidencia)}}" class="btn btn-primary btn-sm me-2"><i class="fa-solid fa-trash"></i> Delete</a>
                         <a type="button" href="{{route('incidencias.edit', $incidencia)}}" class="btn btn-primary btn-sm me-2"><i class="fa-solid fa-pen-to-square"></i> Edit</a>
                     </div>
                 </div>
             </div>
-            <div class="tab-pane fade {{$tabulador['fic']}}" id="ficheros-tab-pane" role="tabpanel" aria-labelledby="ficheros-tab" tabindex="1">
+            <div class="tab-pane fade {{$tabulador['fil']}}" id="ficheros-tab-pane" role="tabpanel" aria-labelledby="ficheros-tab" tabindex="1">
                 <div class="d-flex mb-3" style='width:100%;background-color:white'>
                     <x-cab3 texto="Ficheros" />
                     <form method="POST" enctype="multipart/form-data" id="upload-file" action="{{route('files.fileform')}}">
@@ -143,7 +142,7 @@
                             <td><a href="{{route('files.download',['id' => $file->id])}}">{{$file->Nombre}}</a></td>
                             <td>{{$file->Descripcion}}</td>
                             <td><a href="{{route('files.download',['id' => $file->id])}}" class="color-prymary" role="button" aria-disabled="true"><i class="fa-solid fa-file-arrow-down"></i></a></td>
-                            <td><a href="{{route('control.delete', $file->id)}}" class="color-prymary" role="button" aria-disabled="true"><i class="fa-solid fa-trash"></i></a></td>
+                            <td><a href="{{route('files.delete', $file->id)}}" class="color-prymary" role="button" aria-disabled="true"><i class="fa-solid fa-trash"></i></a></td>
                         </tr>
                         @endforeach
                     </table>
