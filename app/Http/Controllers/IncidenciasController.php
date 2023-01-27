@@ -13,10 +13,14 @@ use App\Models\Informe;
 use Illuminate\Support\Facades\Storage;
 use PDF;
 
-use function GuzzleHttp\Promise\all;
+//use function GuzzleHttp\Promise\all;
 
 class IncidenciasController extends Controller
 {
+    public function fede(){
+        return "HOla";
+    }
+
     public function index($filtro='')
     {
 
@@ -143,6 +147,12 @@ class IncidenciasController extends Controller
         $incidencia = Incidencia::find($id);
 
         return view('incidencias.delete', compact('incidencia'));
+    }
+
+    public function deletes(){
+
+        $codigo = Incidencia::all();
+        return view('incidencias.index',['codigos' => $codigo]);
     }
 
     public function storeinforme(Request $request){

@@ -178,13 +178,24 @@
             </div>
             <div class="tab-pane fade {{$tabulador['fil']}}" id="ficheros-tab-pane" role="tabpanel" aria-labelledby="ficheros-tab" tabindex="0">
                 <div class="d-flex mb-3" style='width:100%;background-color:white'>
-                    <x-cab3 texto="Políticas de actuación" />
+                    <x-cab3 texto="Ficheros" />
+                    <form method="POST" enctype="multipart/form-data" id="upload-file" action="{{route('files.fileform')}}">
+                        @csrf
+                        <input type="hidden" name="id" value="{{$seguimiento->id}}">
+                        <input type="hidden" name="fileable_type" value="App\Models\Seguimiento">
+                        <input type="hidden" name="link" value="seguimiento">
+                        <div class="d-flex  me-2">
+                            <input class="form-control btn-sm me-2" type="text" name="Descripcion" id="Descripcion" placeholder="Descripcion breve del fichero">
+                            <input class="form-control btn-sm me-2" type="file" name="file" id="file" placeholder="Selecciona un fichero">
+                            <input type="submit" name="mysubmit" value="Añadir fichero"  class="btn btn-primary btn-sm" />
+                        </div>
+                    </form>
                 </div>
                 <div class="px-3 mb-5">
                     <div class="container-fluid">
                         <table class='table table-hover'>
                             <tr>
-                                <th width="10">Fichero</th>
+                                <th>Fichero</th>
                                 <th>Descripción</th>
                                 <th width="10"></th>
                                 <th width="10"></th>
@@ -198,30 +209,6 @@
                             </tr>
                             @endforeach
                         </table>
-                        <div class="h-100 p-5 bg-light border rounded-3">
-                            <h5 class="mt-5">Añadir fichero</h5>
-                            <form method="POST" enctype="multipart/form-data" id="upload-file" action="{{route('files.fileform')}}">
-                                <div class="container">
-                                    <div class="row">
-                                        @csrf
-                                        <input type="hidden" name="id" value="{{$seguimiento->id}}">
-                                        <input type="hidden" name="fileable_type" value="App\Models\Seguimiento">
-                                        <input type="hidden" name="link" value="seguimiento">
-                                        <div class="col-12 my-2">
-                                            <label for="Descripcion" class="form-label">Descripción:</label>
-                                            <input class="form-control" type="text" name="Descripcion" id="Descripcion" placeholder="">
-                                        </div>
-                                        <div class="col-12 my-2">
-                                            <input class="form-control" type="file" name="file" id="file" placeholder="Selecciona un fichero">
-                                        </div>
-                                        <div class="col-2 my-2">
-                                            <label for="formFile" class="form-label"> </label>
-                                            <button class="btn btn-primary" type="submit">Enviar</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
                     </div>
                 </div>
 

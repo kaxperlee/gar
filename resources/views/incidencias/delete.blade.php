@@ -13,7 +13,7 @@
 <div class="alert alert-success" role="alert">
     <p>¿Estas seguro que quieres eliminar la incidencia?</p>
     <p><strong>{{$incidencia->id}} - {{$incidencia->Descripcion}}</strong></p>
-     
+
 </div>
 <div class="d-flex  mb-3">
     <a type="button" href="{{route('incidencias.destroy', $incidencia->id)}}" class="btn btn-primary btn-sm me-2"><i class="fa-solid fa-trash"></i> Entendido</a>
